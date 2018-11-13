@@ -1,0 +1,68 @@
+arduino: digital
+
+0:tx
+1:rx
+2:channelb left or right
+3:motora
+4:brakea
+5:brakeb
+6:reversea
+7:reverseb
+8:geara
+9:gearb
+10:channela forward or backward
+11:motorb
+12:channelc scaling rod
+13:channeld brake switch
+
+14: channele
+15: channelf
+16: highbrakea
+17: highbrakeb
+18: interrupta1(2)
+19: interrupta2(3)
+20: interrupta3(18)
+21: interruptb1(19)
+22: interruptb2(20)
+23: interruptb3(21)
+
+
+cha: reverse or forward
+chb: speed scalar
+chc: forward or backward velocity
+chd: left or right velocity
+
+
+
+relay1a: lowbrake
+relay1b: common
+relay1c: no brake
+
+relay2a: high
+relay2b: middle
+relay2c: None
+
+relay3a: forward
+relay3b: reverse
+relay3c: None
+
+relay4a: 12v
+relay4b: common
+relay4c: None
+
+
+
+
+arduino mega onboard: main driver
+arduino mega seperate: for future work related inputs
+arduino n1: daisy chaining proximity sensors
+arduino n2: powering servos and other moters
+arduino uno: other less important (fancy) stuff
+
+mon 8:15 f45
+tue 7:30 f45
+wed break
+thu 1:05 f45
+fri 4:30 f45
+sat 11:30 f45
+sun break
