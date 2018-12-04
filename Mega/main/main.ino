@@ -1,15 +1,11 @@
+//License information
 
-//Sender Code
-//#include "RCrecieve.h"
 #include "Constants.h"
 #include "DifferentialDrive.h"
 #include "Encoder.h"
 #include "Motor.h"
 #include "PositionControl.h"
 #include "SpeedControl.h"
-S
-
-
 
 
 LeftMotor = Motor(LH_REVERSE, LH_STOP, LH_BRAKE, LH_PWM);
