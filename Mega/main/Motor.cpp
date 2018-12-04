@@ -10,7 +10,7 @@
 // accepts three ints as parameters: 
 //    the pin numbers for the direction control pins
 //    and the pin number of the pwm pin
-Motor::Motor(int dir, int lbrake, int hbrake, int pwm)
+Motor::Motor(int dir, int lbrake, int hbrake, int pwm, bool default)
 {
 	_dir = dir;
 	_lbrake = lbrake;
@@ -33,24 +33,17 @@ void Motor::setFwd()
 // sets the motor's direction to backward
 void Motor::setBack()
 {
-	digitalWrite(_dir, HIGH);
+	digitalWrite(_dir, LOW);
 	digitalWrite(_lbrake, HIGH);
 	digitalWrite(_hbrake, HIGH);
 }
 
-// sets the motor to freewheel
-void Motor::setFree()
-{
-	digitalWrite(_dir, HIGH);
-	digitalWrite(_lbrake, HIGH);
-	digitalWrite(_hbrake, HIGH);
-}
 
 // sets the motor to low brake
 void Motor::setBrake()
 {
 	digitalWrite(_dir, HIGH);
-	digitalWrite(_lbrake, HIGH);
+	digitalWrite(_lbrake, LOW);
 	digitalWrite(_hbrake, HIGH);
 }
 
@@ -59,7 +52,7 @@ void Motor::setStop()
 {
 	digitalWrite(_dir, HIGH);
 	digitalWrite(_lbrake, HIGH);
-	digitalWrite(_hbrake, HIGH);
+	digitalWrite(_hbrake, LOW);
 }
 
 // accepts an int, the PWM level, as a parameter

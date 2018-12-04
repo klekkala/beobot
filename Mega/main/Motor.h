@@ -14,7 +14,7 @@ public:
 	Motor(int dir1, int dir2, int pwm);
 	void setFwd();
 	void setBack();
-	void setFree();
+	void setBrake();
 	void setStop();
 	void setPWM(int level);
 private:
