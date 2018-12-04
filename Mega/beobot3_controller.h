@@ -19,7 +19,6 @@
 #ifndef TURTLEBOT3_CONTROLLER_H_
 #define TURTLEBOT3_CONTROLLER_H_
 
-#include <RC100.h>
 
 #include <geometry_msgs/Twist.h>
 

@@ -16,19 +16,19 @@
 
 /* Authors: Yoonseok Pyo, Leon Jung, Darby Lim, HanCheol Cho */
 
-#include "../../include/turtlebot3/turtlebot3_controller.h"
+#include "beobot3_controller.h"
 
-Turtlebot3Controller::Turtlebot3Controller()
+Beobot3Controller::beobot3Controller()
 {
   const_cmd_vel_ = CONST_VEL;
 }
 
-Turtlebot3Controller::~Turtlebot3Controller()
+Beobot3Controller::~beobot3Controller()
 {
   DEBUG_SERIAL.end();
 }
 
-bool Turtlebot3Controller::init(float max_lin_vel, float max_ang_vel, uint8_t scale_lin_vel, uint8_t scale_ang_vel)
+bool Beobot3Controller::init(float max_lin_vel, float max_ang_vel, uint8_t scale_lin_vel, uint8_t scale_ang_vel)
 {
   DEBUG_SERIAL.begin(57600);
   // 57600bps baudrate for RC100 control
@@ -45,7 +45,7 @@ bool Turtlebot3Controller::init(float max_lin_vel, float max_ang_vel, uint8_t sc
   return true;
 }
 
-void Turtlebot3Controller::getRCdata(float *get_cmd_vel)
+void Beobot3Controller::getRCdata(float *get_cmd_vel)
 {
   uint16_t received_data = 0;
 
