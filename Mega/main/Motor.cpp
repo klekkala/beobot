@@ -62,4 +62,5 @@ void Motor::setStop()
 void Motor::setPWM(int level)
 {
 	analogWrite(_pwm, level);
+  Serial.println(_pwm);
 }

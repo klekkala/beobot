@@ -63,6 +63,8 @@ int Encoder::getSpeed()
 // should be called regularly to prevent overflows in _totalCount
 int Encoder::getDistance()
 {
+  Serial.println(_oldCount);
+  Serial.println(_newCount);
 	int distance = _degPerTick * _totalCount;
 	_totalCount = 0;
 	return distance;
@@ -72,6 +74,8 @@ int Encoder::getDistance()
 // must be called using a pin change interrupt from the client sketch
 void Encoder::updateCountA()
 {
+  Serial.println("count");
+  Serial.println(_count);
 	if (_marker == 1)
 		_count++;
 	else
@@ -84,6 +88,8 @@ void Encoder::updateCountA()
 // must be called using a pin change interrupt from the client sketch
 void Encoder::updateCountB()
 {
+  Serial.println("count");
+  Serial.println(_count);
 	if (_marker == 2)
 		_count++;
 	else
@@ -96,6 +102,8 @@ void Encoder::updateCountB()
 // must be called using a pin change interrupt from the client sketch
 void Encoder::updateCountC()
 {
+  Serial.println("count");
+  Serial.println(_count);
 	if (_marker == 0)
 		_count++;
 	else

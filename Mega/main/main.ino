@@ -31,17 +31,17 @@ float value[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 void setup() {
 
   //Left Encoder declarations
-  pinMode(2, INPUT);
-  pinMode(3, INPUT);
-  pinMode(18, INPUT);
+  pinMode(LH_ENCODER_A, INPUT);
+  pinMode(LH_ENCODER_B, INPUT);
+  pinMode(LH_ENCODER_C, INPUT);
   attachInterrupt(0, LeftupdateCountA, RISING);//Initialize the interrupt pin
   attachInterrupt(1, LeftupdateCountB, RISING);//Initialize the interrupt pin
   attachInterrupt(5, LeftupdateCountC, RISING);//Initialize the interrupt pin
 
   //Right Encoder declarations
-  pinMode(19, INPUT);
-  pinMode(20, INPUT);
-  pinMode(21, INPUT);
+  pinMode(RH_ENCODER_A, INPUT);
+  pinMode(RH_ENCODER_B, INPUT);
+  pinMode(RH_ENCODER_C, INPUT);
   attachInterrupt(2, RightupdateCountA, RISING);//Initialize the interrupt pin
   attachInterrupt(3, RightupdateCountB, RISING);//Initialize the interrupt pin
   attachInterrupt(4, RightupdateCountC, RISING);//Initialize the interrupt pin
@@ -51,7 +51,6 @@ void setup() {
   pinMode(VERTICAL, INPUT);
   pinMode(HORIZONTAL, INPUT);
   pinMode(SCALE, INPUT);
-  pinMode(REVERSE, INPUT);
   pinMode(STOP, INPUT);
   pinMode(SWITCH, INPUT);
   
@@ -87,15 +86,17 @@ void loop() {
     value[i] = pulseIn(channel[i], HIGH, 250000); // Read the pulse width of
   }
 
-  Serial.print(channel[VERTICAL]);
+  //Serial.println(value[SWITCH]);
   //Some RC preprocessing
-  channel[VERTICAL] = ((channel[VERTICAL]-1000)/1000)*255;
-  channel[HORIZONTAL] = ((channel[HORIZONTAL]-1000)/1000)*255;
-  channel[SCALE] = map(1000, 990, 2000, 60, 150);
+  float vertical = map(value[VERTICAL], 1000, 2000, -100, 100)/100;
+  float horizontal = map(value[HORIZONTAL], 1000, 2000, 0, 100)/100;
+
+  Serial.print(LeftEncoder.getSpeed());
   
-  if (channel[SWITCH] > 100){
-    Serial.println("bye");
-    //DRIVE(channels)
+  if (value[SWITCH] > 1000){
+    Serial.println(vertical);
+    LeftMotor.setPWM(0);
+    Driver.drive(vertical, horizontal);
   }
 
   else{
