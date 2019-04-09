@@ -10,7 +10,7 @@
 // accepts three ints as parameters: 
 //    the pin numbers for the direction control pins
 //    and the pin number of the pwm pin
-Motor::Motor(int dir, int lbrake, int hbrake, int pwm, bool default)
+Motor::Motor(int dir, int lbrake, int hbrake, int pwm)
 {
 	_dir = dir;
 	_lbrake = lbrake;

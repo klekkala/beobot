@@ -11,14 +11,14 @@
 class Motor
 {
 public:
-	Motor(int dir1, int dir2, int pwm);
+	Motor(int dir, int lbrake, int hbrake, int pwm);
 	void setFwd();
 	void setBack();
 	void setBrake();
 	void setStop();
 	void setPWM(int level);
 private:
-	int _dir1, _dir2, _pwm;
+	int _dir, _lbrake, _hbrake, _pwm;
 };
 
 #endif

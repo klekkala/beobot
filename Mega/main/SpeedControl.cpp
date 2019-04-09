@@ -7,8 +7,8 @@
 
 #include"Arduino.h"
 #include"SpeedControl.h"
-#include<Motor.h>
-#include<Encoder.h>
+#include"Motor.h"
+#include"Encoder.h"
 
 #define DEFAULT_MIN_SPEED 60
 const double defaultGain = 1.0;
@@ -70,7 +70,7 @@ void SpeedControl::setSpeed(int speed)
 	}
 	if (speed == 0)
 	{
-		_motor->setFree();
+		_motor->setBrake();
 	}
 	if (speed < _minSpeed && speed > 0)
 		speed = _minSpeed;

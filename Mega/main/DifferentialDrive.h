@@ -5,7 +5,7 @@
 #define DifferentialDrive_h
 
 #include "Arduino.h"
-#include <PositionControl.h>
+#include "PositionControl.h"
 #include <math.h>
 
 class DifferentialDrive

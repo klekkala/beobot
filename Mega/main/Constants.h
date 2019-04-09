@@ -37,11 +37,11 @@ const int ticksPerRev = 309, wheelCirc = 189, wheelDist = 100;
 
 
 // pins for the RC inputs
-#define VERTICAL 40
-#define HORIZONTAL 41
-#define SCALE 42
-#define REVERSE 43
-#define STOP 44
-#define SAFE 45
+#define VERTICAL 0
+#define HORIZONTAL 1
+#define SCALE 2
+#define REVERSE 3
+#define STOP 4
+#define SWITCH 5
 
 #endif

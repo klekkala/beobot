@@ -22,15 +22,13 @@ Encoder::Encoder(int encoderA, int encoderB, int encoderC,
 	_encoderB = encoderB;
 	_encoderC = encoderC;
 	_count = 0;
+	_marker = 0;
 	_oldCount = 0;
 	_newCount = 0;
 	_totalCount = 0;
 	_lastSpeed = 0;
 	_deltaT = deltaT;
 	_degPerTick = 360.0 / (double)ticksPerRev;
-	pinMode(_encoderA, INPUT);
-	pinMode(_encoderB, INPUT);
-	pinMode(_encoderC, INPUT);
 }
 
 // returns the average speed of the motor output shaft in degrees/second
@@ -72,21 +70,36 @@ int Encoder::getDistance()
 
 // updates the _count when an encoder event occurs
 // must be called using a pin change interrupt from the client sketch
-void Encoder::updateCount()
+void Encoder::updateCountA()
 {
-	if (digitalRead(_encoderA) == HIGH)
-	{
-		if (digitalRead(_encoderB) == LOW)
-			_count++;
-		else
-			_count--;
-	}
+	if (_marker == 1)
+		_count++;
 	else
-	{
-		if (digitalRead(_encoderB) == LOW)
-			_count--;
-		else
-			_count++;
-	}
+		_count--;
+
+	_marker = 0;
 }
 
+// updates the _count when an encoder event occurs
+// must be called using a pin change interrupt from the client sketch
+void Encoder::updateCountB()
+{
+	if (_marker == 2)
+		_count++;
+	else
+		_count--;
+
+	_marker = 1;
+}
+
+// updates the _count when an encoder event occurs
+// must be called using a pin change interrupt from the client sketch
+void Encoder::updateCountC()
+{
+	if (_marker == 0)
+		_count++;
+	else
+		_count--;
+	
+	_marker = 2;
+}

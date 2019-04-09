@@ -9,8 +9,8 @@
 #define SpeedControl_h
 
 #include"Arduino.h"
-#include<Motor.h>
-#include<Encoder.h>
+#include"Motor.h"
+#include"Encoder.h"
 
 class SpeedControl
 {
