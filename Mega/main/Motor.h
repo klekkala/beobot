@@ -19,6 +19,7 @@ public:
 	void setPWM(int level);
 private:
 	int _dir, _lbrake, _hbrake, _pwm;
+  bool _forward, _neutral;
 };
 
 #endif

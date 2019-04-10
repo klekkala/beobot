@@ -15,22 +15,22 @@
 #define RH_REVERSE 8 // direction control for right hand motor BIN2 pin on motor controller
 
 #define LH_PWM 44 // PWM pin for left hand motor
-#define LH_BRAKE 13 // direction control for right hand motor AIN1 pin on motor controller
-#define LH_STOP 13 // direction control for right hand motor AIN1 pin on motor controller
-#define LH_REVERSE 12 // direction control for left hand motor AIN2 pin on motor controller
+#define LH_BRAKE 35 // direction control for right hand motor AIN1 pin on motor controller
+#define LH_STOP 35 // direction control for right hand motor AIN1 pin on motor controller
+#define LH_REVERSE 34 // direction control for left hand motor AIN2 pin on motor controller
 
 // gain values for PID motor control
-const double kP = 0.028, kI = 0.001, kD = 0.0006;
+const double kP = 0.28, kI = 0.001, kD = 0.0006;
 
 // delta T for speed calculation and PID adjustment
 const long deltaT = 50000;
 
-const int ticksPerRev = 45, wheelCirc = 189, wheelDist = 100;
+const int ticksPerRev = 45, wheelCirc = 76, wheelDist = 508;
 
 // pins for the encoder inputs
-#define RH_ENCODER_A 21 
+#define RH_ENCODER_A 19
 #define RH_ENCODER_B 20
-#define RH_ENCODER_C 19
+#define RH_ENCODER_C 21
 #define LH_ENCODER_A 2
 #define LH_ENCODER_B 3
 #define LH_ENCODER_C 18

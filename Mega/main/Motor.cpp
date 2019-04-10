@@ -16,6 +16,8 @@ Motor::Motor(int dir, int lbrake, int hbrake, int pwm)
 	_lbrake = lbrake;
 	_hbrake = hbrake;
 	_pwm = pwm;
+ _forward = 1;
+ _neutral = 1;
 	pinMode(_dir, OUTPUT);
 	pinMode(_lbrake, OUTPUT);
 	pinMode(_hbrake, OUTPUT);
@@ -25,23 +27,36 @@ Motor::Motor(int dir, int lbrake, int hbrake, int pwm)
 // sets the motor's direction to forward
 void Motor::setFwd()
 {
-	digitalWrite(_dir, HIGH);
-	digitalWrite(_lbrake, HIGH);
-	digitalWrite(_hbrake, HIGH);
+  if(!_forward or _neutral){
+    analogWrite(_pwm, 0);
+    digitalWrite(_dir, LOW);
+    digitalWrite(_lbrake, HIGH);
+    digitalWrite(_hbrake, HIGH);
+    delay(1000);
+    _forward = 1;
+    _neutral = 0;
+  }
 }
 
 // sets the motor's direction to backward
 void Motor::setBack()
 {
-	digitalWrite(_dir, LOW);
-	digitalWrite(_lbrake, HIGH);
-	digitalWrite(_hbrake, HIGH);
+  if(_forward or _neutral){
+    analogWrite(_pwm, 0);
+    digitalWrite(_dir, HIGH);
+    digitalWrite(_lbrake, HIGH);
+    digitalWrite(_hbrake, HIGH);
+    delay(1000);
+    _forward = 0;
+    _neutral = 0;
+  }
 }
 
 
 // sets the motor to low brake
 void Motor::setBrake()
 {
+  _neutral = 1;
 	digitalWrite(_dir, HIGH);
 	digitalWrite(_lbrake, LOW);
 	digitalWrite(_hbrake, HIGH);
@@ -61,6 +76,14 @@ void Motor::setStop()
 // behavior is undefined if level is outside this range
 void Motor::setPWM(int level)
 {
+  /*int period = 200;
+  unsigned long time_now = 0;
+  time_now = millis();*/
 	analogWrite(_pwm, level);
-  Serial.println(_pwm);
+ /*
+  //Serial.println("PWM is");
+  //Serial.println(level);
+      while(millis() < time_now + period){
+        //wait approx. [period] ms
+    }*/
 }

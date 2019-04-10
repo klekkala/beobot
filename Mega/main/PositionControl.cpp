@@ -50,7 +50,7 @@ void PositionControl::rotate(int degrees, int speed)
 			degrees *= -1;
 			speed *= -1;
 		}
-		_distance += _speedControl->getDistance();
+		//_distance += _speedControl->getDistance();
 		_error = degrees;
 		_speed = speed;
 		_positioning = true;
@@ -59,24 +59,26 @@ void PositionControl::rotate(int degrees, int speed)
 
 void PositionControl::adjustPWM()
 {
+  while((_error > 2 || _error < -2)){
 	int thisDistance = _speedControl->getDistance();
 	_distance += thisDistance;
 	if (_positioning)
 	{
 		_error -= thisDistance;
-
+    Serial.println("Error is");
+    Serial.println(_error);
+    Serial.println(thisDistance);
 		int newSpeed = (double)_error * _kP;
-		constrainSpeed(newSpeed);
-		if (_error < 2 && _error > -2)
-		{
-			_positioning = false;
-			_speed = 0;
-			newSpeed = 0;
-			_error = 0;
-		}
+    
+		//constrainSpeed(newSpeed);
+
 		_speedControl->setSpeed(newSpeed);
+     //Serial.println("newspeed is");
+     //Serial.println(newSpeed);
+
 	}
 	_speedControl->adjustPWM();
+  }
 }
 
 // doesn't return correct distance
