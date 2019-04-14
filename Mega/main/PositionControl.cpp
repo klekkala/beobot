@@ -8,7 +8,7 @@
 #include"PositionControl.h"
 #include"SpeedControl.h"
 
-const double defaultKP = 2.0;
+const double defaultKP = 0.0028;
 
 PositionControl::PositionControl(SpeedControl *speedControl)
 {
@@ -56,30 +56,28 @@ void PositionControl::rotate(int degrees, int speed)
 		_positioning = true;
 	}
 }
-
 void PositionControl::adjustPWM()
 {
-  while((_error > 2 || _error < -2)){
-	int thisDistance = _speedControl->getDistance();
-	_distance += thisDistance;
-	if (_positioning)
-	{
-		_error -= thisDistance;
-    Serial.println("Error is");
-    Serial.println(_error);
-    Serial.println(thisDistance);
-		int newSpeed = (double)_error * _kP;
-    
-		//constrainSpeed(newSpeed);
+  int thisDistance = _speedControl->getDistance();
+  _distance += thisDistance;
+  if (_positioning)
+  {
+    _error -= thisDistance;
 
-		_speedControl->setSpeed(newSpeed);
-     //Serial.println("newspeed is");
-     //Serial.println(newSpeed);
-
-	}
-	_speedControl->adjustPWM();
+    int newSpeed = (double)_error * _kP;
+    constrainSpeed(newSpeed);
+    if (_error < 6 && _error > -6)
+    {
+      _positioning = false;
+      _speed = 0;
+      newSpeed = 0;
+      _error = 0;
+    }
+    _speedControl->setSpeed(newSpeed);
   }
+  _speedControl->adjustPWM();
 }
+
 
 // doesn't return correct distance
 int PositionControl::getDistance()

@@ -11,7 +11,7 @@
 #include"Encoder.h"
 
 #define DEFAULT_MIN_SPEED 70
-const double defaultGain = 1.0;
+const double defaultGain = 0.0;
 
 // accepts a pointer to a Motor and a pointer to an Encoder as parameters
 // sets gains to 1.0 and minimum speed to 60 by default
@@ -93,24 +93,20 @@ int SpeedControl::getDistance()
 // motor speed in the Encoder object
 void SpeedControl::adjustPWM()
 {
-	int speed = _encoder->getSpeed(); // motor control returns vector speed
-	/*if (speed < 0) speed *= -1;  // convert speed to scalar
-	int error = _setPoint - speed;
-	_iTerm += (_kI * (double)error);
-	double dInput = speed - _lastSpeed;
-	int adjustment = (_kP * (double)error) + _iTerm - (_kD * dInput);*/
-  _pwm += _setPoint;
-  //Serial.println("final pwm");
-  //Serial.println(_pwm);
-	
-	constrainPWM();
-  
-	_motor->setPWM(_pwm);
-	//_lastSpeed = speed;
+  int speed = _encoder->getSpeed(); // motor control returns vector speed
+  if (speed < 0) speed *= -1;  // convert speed to scalar
+  int error = _setPoint - speed;
+  _iTerm += (_kI * (double)error);
+  double dInput = speed - _lastSpeed;
+  int adjustment = (_kP * (double)error) + _iTerm - (_kD * dInput);
+  _pwm += adjustment;
+  constrainPWM();
+  _motor->setPWM(_pwm);
+  _lastSpeed = speed;
 }
 
 void SpeedControl::constrainPWM()
 {
-	if (_pwm > 200) _pwm = 200;
-	else if (_pwm < 100) _pwm = 100;
+	if (_pwm > 255) _pwm = 255;
+	else if (_pwm < 150) _pwm = 150;
 }

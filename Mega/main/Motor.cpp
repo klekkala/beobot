@@ -28,6 +28,7 @@ Motor::Motor(int dir, int lbrake, int hbrake, int pwm)
 void Motor::setFwd()
 {
   if(!_forward or _neutral){
+    Serial.println("hello");
     analogWrite(_pwm, 0);
     digitalWrite(_dir, LOW);
     digitalWrite(_lbrake, HIGH);
@@ -80,6 +81,8 @@ void Motor::setPWM(int level)
   unsigned long time_now = 0;
   time_now = millis();*/
 	analogWrite(_pwm, level);
+  Serial.println("level pwm");
+  Serial.println(level);
  /*
   //Serial.println("PWM is");
   //Serial.println(level);

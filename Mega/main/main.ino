@@ -17,6 +17,9 @@ Encoder RightEncoder = Encoder(RH_ENCODER_A, RH_ENCODER_C, RH_ENCODER_B, deltaT,
 SpeedControl LeftSpeedControl = SpeedControl(&LeftMotor, &LeftEncoder);
 SpeedControl RightSpeedControl = SpeedControl(&RightMotor, &RightEncoder);
 
+//LeftSpeedControl.setGains(kP, kI, kD);
+//RightSpeedControl.setGains(kP, kI, kD);
+
 PositionControl LeftPositionControl = PositionControl(&LeftSpeedControl);
 PositionControl RightPositionControl = PositionControl(&RightSpeedControl);
 
@@ -30,6 +33,8 @@ float value[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
 void setup() {
 
+  LeftSpeedControl.setGains(kP, kI, kD);
+  RightSpeedControl.setGains(kP, kI, kD);
   //Left Encoder declarations
   pinMode(LH_ENCODER_A, INPUT);
   pinMode(LH_ENCODER_B, INPUT);
@@ -92,6 +97,7 @@ void loop() {
   float horizontal = map(value[HORIZONTAL], 1000, 2000, 0, 100)/100;
   Serial.println("Start");
 
+
 /*
   digitalWrite(LH_REVERSE, LOW);
   //digitalWrite(37, HIGH);
@@ -106,7 +112,7 @@ void loop() {
   delay(1000);
   analogWrite(LH_PWM, 0);*/
 
-
+  //analogWrite(LH_PWM, 100);
   /*digitalWrite(LH_REVERSE, LOW);
   delay(1000);
   analogWrite(LH_PWM, 200);*/
@@ -121,13 +127,14 @@ void loop() {
   delay(100);
   LeftMotor.setPWM(200);
   delay(1000);*/
-  //LeftMotor.setPWM(200);
+  //LeftMotor.setFwd();
+  //LeftMotor.setPWM(150);
   
   
-  LeftPositionControl.rotate(90, 15);
-  LeftPositionControl.adjustPWM();
+  //LeftPositionControl.rotate(60, 15);
+  //LeftPositionControl.adjustPWM();
 
-  LeftMotor.setPWM(0);
+  //LeftMotor.setPWM(0);
   //Serial.println(digitalRead(34));
   //delay(10000);
   /*
@@ -143,29 +150,47 @@ void loop() {
   }
   */
   
-  delay(100000);
+  //delay(100000);
 }
 
 void LeftupdateCountA(){
+  detachInterrupt(0);
+  attachInterrupt(1, LeftupdateCountB, RISING);
+  attachInterrupt(5, LeftupdateCountC, RISING);
   LeftEncoder.updateCountA();
 }
 
 void LeftupdateCountB(){
+  detachInterrupt(1);
+  attachInterrupt(0, LeftupdateCountA, RISING);
+  attachInterrupt(5, LeftupdateCountC, RISING);
   LeftEncoder.updateCountB();
 }
 
 void LeftupdateCountC(){
+  detachInterrupt(5);
+  attachInterrupt(0, LeftupdateCountA, RISING);
+  attachInterrupt(1, LeftupdateCountB, RISING);
   LeftEncoder.updateCountC();
 }
 
 void RightupdateCountA(){
-  RightEncoder.updateCountA();
+  detachInterrupt(2);
+  LeftEncoder.updateCountA();
+  attachInterrupt(3, RightupdateCountB, RISING);
+  attachInterrupt(4, RightupdateCountC, RISING);
 }
 
 void RightupdateCountB(){
-  RightEncoder.updateCountB();
+  detachInterrupt(3);
+  LeftEncoder.updateCountA();
+  attachInterrupt(2, RightupdateCountA, RISING);
+  attachInterrupt(4, RightupdateCountC, RISING);
 }
 
 void RightupdateCountC(){
-  RightEncoder.updateCountC();
+  detachInterrupt(4);
+  LeftEncoder.updateCountA();
+  attachInterrupt(2, RightupdateCountA, RISING);
+  attachInterrupt(3, RightupdateCountB, RISING);
 }

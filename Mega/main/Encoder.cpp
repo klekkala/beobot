@@ -89,6 +89,7 @@ void Encoder::updateCountB()
 	else if(_marker ==0)
 		_count--;
 	_marker = 1;
+
 }
 
 // updates the _count when an encoder event occurs
