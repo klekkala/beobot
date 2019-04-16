@@ -21,7 +21,6 @@ Encoder::Encoder(int encoderA, int encoderB, int encoderC,
 	_encoderA = encoderA;
 	_encoderB = encoderB;
 	_encoderC = encoderC;
-	_count = 0;
 	_marker = 0;
 	_oldCount = 0;
 	_newCount = 0;
@@ -29,6 +28,10 @@ Encoder::Encoder(int encoderA, int encoderB, int encoderC,
 	_lastSpeed = 0;
 	_deltaT = deltaT;
 	_degPerTick = 360.0 / (double)ticksPerRev;
+  _deltaT = deltaT;
+  _rawCounts.tickA = 0;
+  _rawCounts.tickB = 0;
+  _rawCounts.tickC = 0;
 }
 
 // returns the average speed of the motor output shaft in degrees/second
@@ -36,6 +39,7 @@ Encoder::Encoder(int encoderA, int encoderB, int encoderC,
 // MUST be called every _deltaT microseconds to return accurate speed
 int Encoder::getSpeed()
 {
+ 
 	_oldCount = _newCount;
 	_newCount = _count;
 	// calculate number of ticks elapsed since in last deltaT
@@ -68,37 +72,78 @@ int Encoder::getDistance()
 	return distance;
 }
 
+// Atomically read both counts.
+TickCounts Encoder::getCounts()
+{
+    TickCounts counts;
+    noInterrupts();
+    counts.tickA = _rawCounts.tickA;
+    counts.tickB = _rawCounts.tickB;
+    counts.tickC = _rawCounts.tickC;
+    interrupts();
+    return counts;
+}
+
 // updates the _count when an encoder event occurs
 // must be called using a pin change interrupt from the client sketch
 void Encoder::updateCountA()
 {
-	if (_marker == 1)
-		_count++;
-	else if(_marker == 2)
-		_count--;
-
-	_marker = 0;
+  int0diff = micros() - int0time;
+  if ( int0diff < threshold )
+    return;
+  else{
+      //Serial.println("A");
+    //Serial.println(int0diff);
+    //Serial.println(_marker);
+  _rawCounts.tickA++;
+  if (_marker == 1)
+    _count++;
+  else if(_marker ==2)
+    _count--;
+  _marker = 0;
+  int0time = micros();
+}
 }
 
 // updates the _count when an encoder event occurs
 // must be called using a pin change interrupt from the client sketch
 void Encoder::updateCountB()
 {
-	if (_marker == 2)
-		_count++;
-	else if(_marker ==0)
-		_count--;
-	_marker = 1;
-
+  int1diff = micros() - int1time;
+  if ( int1diff < threshold )
+    return;
+  else{
+    //Serial.println("B");
+    //Serial.println(int1diff);
+    //Serial.println(_marker);
+    _rawCounts.tickB++;
+  if (_marker == 2)
+    _count++;
+  else if(_marker ==0)
+    _count--;
+  _marker = 1;
+  int1time = micros();
+}
 }
 
 // updates the _count when an encoder event occurs
 // must be called using a pin change interrupt from the client sketch
 void Encoder::updateCountC()
 {
-	if (_marker == 0)
-		_count++;
-	else if(_marker ==1)
-		_count--;
-	_marker = 2;
+  int2diff = micros() - int2time;
+  //Serial.println(_marker);
+  if ( int2diff < threshold )
+    return;
+  else{
+      //Serial.println("C");
+    //Serial.println(int2diff);
+        //Serial.println(_marker);
+  _rawCounts.tickC++;
+  if (_marker == 0)
+    _count++;
+  else if(_marker ==1)
+    _count--;
+  _marker = 2;
+  int2time = micros();
+  }
 }

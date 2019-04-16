@@ -27,6 +27,7 @@ private:
 	Motor *_motor;
 	Encoder *_encoder;
 	void constrainPWM();
+  bool _direction;
 };
 
 #endif

@@ -22,8 +22,9 @@ SpeedControl::SpeedControl(Motor *motor, Encoder *encoder)
 	_iTerm = 0;
 	_pwm = 0;
 	_lastSpeed = 0;
+  _direction = 1;
 
-	_kP = defaultGain;
+	_kP = 2.8;
 	_kI = defaultGain;
 	_kD = defaultGain;
 
@@ -38,7 +39,7 @@ SpeedControl::SpeedControl(Motor *motor, Encoder *encoder)
 // sets the PID gains to the given values
 void SpeedControl::setGains(double kP, double kI, double kD)
 {
-	_kP = kP;
+	_kP = 2.8;
 	_kI = kI;
 	_kD = kD;
 }
@@ -63,15 +64,17 @@ void SpeedControl::setSpeed(int speed)
 	{
 		_motor->setBack();
 		speed *= -1;
+    _direction = 0;
     Serial.println("backset");
 	}
 	else if (speed > 0)
 	{
 		_motor->setFwd();
+    _direction = 1;
 	}
 	if (speed == 0)
 	{
-		_motor->setBrake();
+		_motor->setBack();
 	}
 	if (speed < _minSpeed && speed > 0)
 		speed = _minSpeed;
@@ -100,6 +103,12 @@ void SpeedControl::adjustPWM()
   double dInput = speed - _lastSpeed;
   int adjustment = (_kP * (double)error) + _iTerm - (_kD * dInput);
   _pwm += adjustment;
+    Serial.println("pwm");
+  Serial.println(_pwm);
+  Serial.println("adjust");
+  Serial.println(adjustment);
+  Serial.println("_setPoint");
+  Serial.println(_setPoint);
   constrainPWM();
   _motor->setPWM(_pwm);
   _lastSpeed = speed;
@@ -107,6 +116,13 @@ void SpeedControl::adjustPWM()
 
 void SpeedControl::constrainPWM()
 {
-	if (_pwm > 255) _pwm = 255;
-	else if (_pwm < 150) _pwm = 150;
+	if (_direction == 1){
+	  if (_pwm > 255) _pwm = 255;
+    else if (_pwm < 120) _pwm = 120;
+	}
+
+  else{
+    if (_pwm > 255) _pwm = 255;
+    else if (_pwm < 150) _pwm = 150;
+  }
 }

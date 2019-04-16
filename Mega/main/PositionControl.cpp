@@ -8,7 +8,7 @@
 #include"PositionControl.h"
 #include"SpeedControl.h"
 
-const double defaultKP = 0.0028;
+const double defaultKP = 0.28;
 
 PositionControl::PositionControl(SpeedControl *speedControl)
 {
@@ -63,19 +63,23 @@ void PositionControl::adjustPWM()
   if (_positioning)
   {
     _error -= thisDistance;
-
+    Serial.println("error is");
+    Serial.println(_error);
+        Serial.println("thisdistance is");
+    Serial.println(thisDistance);
     int newSpeed = (double)_error * _kP;
-    constrainSpeed(newSpeed);
+    //constrainSpeed(newSpeed);
     if (_error < 6 && _error > -6)
     {
-      _positioning = false;
       _speed = 0;
       newSpeed = 0;
       _error = 0;
     }
+    Serial.println("speed is");
+    Serial.println(newSpeed);
     _speedControl->setSpeed(newSpeed);
+    _speedControl->adjustPWM();
   }
-  _speedControl->adjustPWM();
 }
 
 

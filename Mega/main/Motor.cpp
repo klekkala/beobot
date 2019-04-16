@@ -18,6 +18,7 @@ Motor::Motor(int dir, int lbrake, int hbrake, int pwm)
 	_pwm = pwm;
  _forward = 1;
  _neutral = 1;
+ _clutch = 0;
 	pinMode(_dir, OUTPUT);
 	pinMode(_lbrake, OUTPUT);
 	pinMode(_hbrake, OUTPUT);
@@ -31,9 +32,9 @@ void Motor::setFwd()
     Serial.println("hello");
     analogWrite(_pwm, 0);
     digitalWrite(_dir, LOW);
-    digitalWrite(_lbrake, HIGH);
+    digitalWrite(_lbrake, LOW);
     digitalWrite(_hbrake, HIGH);
-    delay(1000);
+    //delay(1000);
     _forward = 1;
     _neutral = 0;
   }
@@ -43,32 +44,38 @@ void Motor::setFwd()
 void Motor::setBack()
 {
   if(_forward or _neutral){
+    _clutch = 1;
+    Serial.println("setback");
     analogWrite(_pwm, 0);
     digitalWrite(_dir, HIGH);
-    digitalWrite(_lbrake, HIGH);
+    digitalWrite(_lbrake, LOW);
     digitalWrite(_hbrake, HIGH);
-    delay(1000);
+    //delay(1000);
     _forward = 0;
     _neutral = 0;
+    //analogWrite(_pwm, 250);
+    //_clutch = 0;
+    //Serial.println("delay");
   }
 }
 
-
 // sets the motor to low brake
-void Motor::setBrake()
+void Motor::setStop()
 {
+  Serial.println("stop");
   _neutral = 1;
-	digitalWrite(_dir, HIGH);
-	digitalWrite(_lbrake, LOW);
-	digitalWrite(_hbrake, HIGH);
+  digitalWrite(_dir, LOW);
+  digitalWrite(_lbrake, HIGH);
+  digitalWrite(_hbrake, LOW);
+  //delay(1000);
 }
 
 // sets the motor to high brake
-void Motor::setStop()
+void Motor::setBrake()
 {
-	digitalWrite(_dir, HIGH);
-	digitalWrite(_lbrake, HIGH);
-	digitalWrite(_hbrake, LOW);
+	//digitalWrite(_dir, HIGH);
+	//digitalWrite(_lbrake, HIGH);
+	//digitalWrite(_hbrake, HIGH);
 }
 
 // accepts an int, the PWM level, as a parameter

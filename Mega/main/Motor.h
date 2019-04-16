@@ -17,6 +17,7 @@ public:
 	void setBrake();
 	void setStop();
 	void setPWM(int level);
+  bool _clutch;
 private:
 	int _dir, _lbrake, _hbrake, _pwm;
   bool _forward, _neutral;

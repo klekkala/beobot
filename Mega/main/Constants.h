@@ -15,7 +15,7 @@
 #define RH_REVERSE 8 // direction control for right hand motor BIN2 pin on motor controller
 
 #define LH_PWM 44 // PWM pin for left hand motor
-#define LH_BRAKE 35 // direction control for right hand motor AIN1 pin on motor controller
+#define LH_BRAKE 49 // direction control for right hand motor AIN1 pin on motor controller
 #define LH_STOP 35 // direction control for right hand motor AIN1 pin on motor controller
 #define LH_REVERSE 34 // direction control for left hand motor AIN2 pin on motor controller
 
