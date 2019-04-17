@@ -24,7 +24,7 @@ SpeedControl::SpeedControl(Motor *motor, Encoder *encoder)
 	_lastSpeed = 0;
   _direction = 1;
 
-	_kP = 2.8;
+	_kP = 0.005;
 	_kI = defaultGain;
 	_kD = defaultGain;
 
@@ -39,7 +39,7 @@ SpeedControl::SpeedControl(Motor *motor, Encoder *encoder)
 // sets the PID gains to the given values
 void SpeedControl::setGains(double kP, double kI, double kD)
 {
-	_kP = 2.8;
+	_kP = 0.005;
 	_kI = kI;
 	_kD = kD;
 }
@@ -71,17 +71,18 @@ void SpeedControl::setSpeed(int speed)
 	{
 		_motor->setFwd();
     _direction = 1;
+    Serial.println("forset");
 	}
 	if (speed == 0)
 	{
-		_motor->setBack();
+		_motor->setStop();
+    Serial.println("stop");
 	}
-	if (speed < _minSpeed && speed > 0)
-		speed = _minSpeed;
   //Serial.print(_minSpeed);
   //Serial.println(speed);
 	_setPoint = speed;
 }
+
 
 // returns the distance rotated by the motor's output shaft in degrees
 // since the last call to getDistance()
@@ -96,19 +97,21 @@ int SpeedControl::getDistance()
 // motor speed in the Encoder object
 void SpeedControl::adjustPWM()
 {
-  int speed = _encoder->getSpeed(); // motor control returns vector speed
+  int speed = _encoder->getSpeed(_motor->_forward); // motor control returns vector speed
   if (speed < 0) speed *= -1;  // convert speed to scalar
   int error = _setPoint - speed;
-  _iTerm += (_kI * (double)error);
-  double dInput = speed - _lastSpeed;
-  int adjustment = (_kP * (double)error) + _iTerm - (_kD * dInput);
-  _pwm += adjustment;
+  //_iTerm += (_kI * (double)error);
+  //double dInput = speed - _lastSpeed;
+  int adjustment = (_kP * (double)error);
     Serial.println("pwm");
   Serial.println(_pwm);
   Serial.println("adjust");
   Serial.println(adjustment);
   Serial.println("_setPoint");
   Serial.println(_setPoint);
+ Serial.println("speed");
+  Serial.println(speed);
+  _pwm += adjustment;
   constrainPWM();
   _motor->setPWM(_pwm);
   _lastSpeed = speed;
@@ -117,12 +120,12 @@ void SpeedControl::adjustPWM()
 void SpeedControl::constrainPWM()
 {
 	if (_direction == 1){
-	  if (_pwm > 255) _pwm = 255;
-    else if (_pwm < 120) _pwm = 120;
+	  if (_pwm > 130) _pwm = 130;
+    else if (_pwm < 90) _pwm = 90;
 	}
 
   else{
-    if (_pwm > 255) _pwm = 255;
+    if (_pwm > 180) _pwm = 180;
     else if (_pwm < 150) _pwm = 150;
   }
 }

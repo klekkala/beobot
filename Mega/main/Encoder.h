@@ -13,9 +13,9 @@
 #include "Arduino.h"
 
    struct TickCounts {
-    uint32_t tickA;
-    uint32_t tickB;
-    uint32_t tickC;
+    long tickA;
+    long tickB;
+    long tickC;
 };
 
 class Encoder
@@ -24,19 +24,22 @@ public:
 
 	Encoder(int encoderA, int encoderB, int encoderC, 
 			long deltaT, int ticksPerRev);
-	int getSpeed(); // returns speed in degrees per second
+	int getSpeed(bool forward); // returns speed in degrees per second
 	int getDistance(); // returns distance rotated in degrees
   TickCounts getCounts();
-	void updateCountA();
-  void updateCountB();
-  void updateCountC();
+	void updateCountA(bool forward);
+  void updateCountB(bool forward);
+  void updateCountC(bool forward);
+    void updateCountA_up();
+  void updateCountB_up();
+  void updateCountC_up();
   volatile unsigned long int0time = 0;
   volatile unsigned long int1time = 0;
   volatile unsigned long int2time = 0;
   volatile unsigned long int0diff = 0;
   volatile unsigned long int1diff = 0;
   volatile unsigned long int2diff = 0;
-  volatile unsigned long threshold = 100000;
+  volatile unsigned long threshold = 20000;
 
 
 
@@ -47,7 +50,7 @@ private:
 	volatile long _count, _oldCount, _newCount;
 	long _deltaT; // in microseconds
 	int _lastSpeed;
-	long _totalCount;
+	volatile long _totalCount;
   TickCounts _rawCounts;
 };
 

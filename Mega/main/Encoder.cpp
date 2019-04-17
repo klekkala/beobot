@@ -16,18 +16,18 @@
 //   ticksPerRev - the number of encoder ticks per revolution of 
 //                 the output shaft
 Encoder::Encoder(int encoderA, int encoderB, int encoderC, 
-				 long deltaT, int ticksPerRev)
+         long deltaT, int ticksPerRev)
 {
-	_encoderA = encoderA;
-	_encoderB = encoderB;
-	_encoderC = encoderC;
-	_marker = 0;
-	_oldCount = 0;
-	_newCount = 0;
-	_totalCount = 0;
-	_lastSpeed = 0;
-	_deltaT = deltaT;
-	_degPerTick = 360.0 / (double)ticksPerRev;
+  _encoderA = encoderA;
+  _encoderB = encoderB;
+  _encoderC = encoderC;
+  _marker = 0;
+  _oldCount = 0;
+  _newCount = 0;
+  _totalCount = 0;
+  _lastSpeed = 0;
+  _deltaT = deltaT;
+  _degPerTick = 360.0 / (double)ticksPerRev;
   _deltaT = deltaT;
   _rawCounts.tickA = 0;
   _rawCounts.tickB = 0;
@@ -37,29 +37,44 @@ Encoder::Encoder(int encoderA, int encoderB, int encoderC,
 // returns the average speed of the motor output shaft in degrees/second
 // over the last _deltaT microseconds
 // MUST be called every _deltaT microseconds to return accurate speed
-int Encoder::getSpeed()
+int Encoder::getSpeed(bool forward)
 {
- 
-	_oldCount = _newCount;
-	_newCount = _count;
-	// calculate number of ticks elapsed since in last deltaT
-	int difference = _newCount - _oldCount;
-	// update _totalCount
-	_totalCount += difference;
-	int degPerSec;
-	// calculate new speed if _count has not overflowed 
-	if (difference < 50000 && difference > -50000)
-	{
-		double deltaTInSec = 1000000 / _deltaT;
-		double ticksPerSec = (double)difference * (double)deltaTInSec;
-		degPerSec = ticksPerSec * _degPerTick;
-		_lastSpeed = degPerSec;
-	}
-	else // use previous speed if overflow has occurred in _count
-	{
-		degPerSec = _lastSpeed;
-	}
-	return degPerSec;
+  if(forward == 1){
+    _count = min(_rawCounts.tickA, min(_rawCounts.tickB, _rawCounts.tickC));
+   _rawCounts.tickA = _count;
+  _rawCounts.tickB = _count;
+  _rawCounts.tickC = _count;
+  }
+  else{
+    _count = max(_rawCounts.tickA, max(_rawCounts.tickB, _rawCounts.tickC));
+   _rawCounts.tickA = _count;
+  _rawCounts.tickB = _count;
+  _rawCounts.tickC = _count;
+  }
+  
+  _oldCount = _newCount;
+  _newCount = _count;
+  // calculate number of ticks elapsed since in last deltaT
+ //Serial.println("infunc");
+ //Serial.println(_newCount);
+ //Serial.println(_oldCount);
+  int difference = _newCount - _oldCount;
+  // update _totalCount
+  _totalCount += difference;
+  int degPerSec;
+  // calculate new speed if _count has not overflowed 
+  if (difference < 50000 && difference > -50000)
+  {
+    double deltaTInSec = 1000000 / _deltaT;
+    double ticksPerSec = (double)difference * (double)deltaTInSec;
+    degPerSec = ticksPerSec * _degPerTick;
+    _lastSpeed = degPerSec;
+  }
+  else // use previous speed if overflow has occurred in _count
+  {
+    degPerSec = _lastSpeed;
+  }
+  return degPerSec;
 }
 
 // returns net distance rotated by the motor's output shaft in degrees
@@ -67,9 +82,9 @@ int Encoder::getSpeed()
 // should be called regularly to prevent overflows in _totalCount
 int Encoder::getDistance()
 {
-	int distance = _degPerTick * _totalCount;
-	_totalCount = 0;
-	return distance;
+  int distance = _degPerTick * _totalCount;
+  _totalCount = 0;
+  return distance;
 }
 
 // Atomically read both counts.
@@ -86,7 +101,7 @@ TickCounts Encoder::getCounts()
 
 // updates the _count when an encoder event occurs
 // must be called using a pin change interrupt from the client sketch
-void Encoder::updateCountA()
+void Encoder::updateCountA(bool forward)
 {
   int0diff = micros() - int0time;
   if ( int0diff < threshold )
@@ -95,19 +110,19 @@ void Encoder::updateCountA()
       //Serial.println("A");
     //Serial.println(int0diff);
     //Serial.println(_marker);
-  _rawCounts.tickA++;
-  if (_marker == 1)
-    _count++;
-  else if(_marker ==2)
-    _count--;
-  _marker = 0;
+  if(forward == 1){
+    _rawCounts.tickA++;
+  }
+  else{
+    _rawCounts.tickA--;
+  }
   int0time = micros();
 }
 }
 
 // updates the _count when an encoder event occurs
 // must be called using a pin change interrupt from the client sketch
-void Encoder::updateCountB()
+void Encoder::updateCountB(bool forward)
 {
   int1diff = micros() - int1time;
   if ( int1diff < threshold )
@@ -116,34 +131,33 @@ void Encoder::updateCountB()
     //Serial.println("B");
     //Serial.println(int1diff);
     //Serial.println(_marker);
+  if(forward == 1){
     _rawCounts.tickB++;
-  if (_marker == 2)
-    _count++;
-  else if(_marker ==0)
-    _count--;
-  _marker = 1;
+  }
+  else{
+    _rawCounts.tickB--;
+  }
   int1time = micros();
 }
 }
 
 // updates the _count when an encoder event occurs
 // must be called using a pin change interrupt from the client sketch
-void Encoder::updateCountC()
+void Encoder::updateCountC(bool forward)
 {
   int2diff = micros() - int2time;
-  //Serial.println(_marker);
   if ( int2diff < threshold )
     return;
   else{
       //Serial.println("C");
     //Serial.println(int2diff);
         //Serial.println(_marker);
-  _rawCounts.tickC++;
-  if (_marker == 0)
-    _count++;
-  else if(_marker ==1)
-    _count--;
-  _marker = 2;
+  if(forward == 1){
+    _rawCounts.tickC++;
+  }
+  else{
+    _rawCounts.tickC--;
+  }
   int2time = micros();
   }
 }

@@ -18,6 +18,7 @@ public:
 	SpeedControl(Motor *motor, Encoder *encoder);
 	void setGains(double kP, double kI, double kD);
 	void setSpeed(int speed); // in degrees/s
+  void setDir(bool dir);
 	void setMinSpeed(int minSpeed);
 	int getDistance(); // returns total distance rotated in degrees
 	void adjustPWM();

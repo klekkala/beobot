@@ -33,13 +33,24 @@ void Motor::setFwd()
     analogWrite(_pwm, 0);
     digitalWrite(_dir, LOW);
     digitalWrite(_lbrake, LOW);
-    digitalWrite(_hbrake, HIGH);
-    //delay(1000);
+    digitalWrite(_hbrake, LOW);
+    /*unsigned long delayStart = 0; // the time the delay started
+bool delayRunning = false; // true if still waiting for delay to finish
+        delayStart = millis();   // start delay
+  delayRunning = true; // not finished yet
+if (delayRunning && ((millis() - delayStart) >= 1000000)) {
+    delayRunning = false;
+    Serial.println("Turned LED Off");
+  }
+      Serial.println("del");
+    }*/
+    delay(1000);
     _forward = 1;
     _neutral = 0;
-  }
+    Serial.println("delay");
 }
 
+}
 // sets the motor's direction to backward
 void Motor::setBack()
 {
@@ -49,13 +60,20 @@ void Motor::setBack()
     analogWrite(_pwm, 0);
     digitalWrite(_dir, HIGH);
     digitalWrite(_lbrake, LOW);
-    digitalWrite(_hbrake, HIGH);
-    //delay(1000);
+    digitalWrite(_hbrake, LOW);
+    /*unsigned long delayStart = 0; // the time the delay started
+bool delayRunning = false; // true if still waiting for delay to finish
+        delayStart = millis();   // start delay
+  delayRunning = true; // not finished yet
+if (delayRunning && ((millis() - delayStart) >= 1000000)) {
+    delayRunning = false;
+    Serial.println("Turned LED Off");
+  }*/
+  delay(1000);
     _forward = 0;
     _neutral = 0;
-    //analogWrite(_pwm, 250);
     //_clutch = 0;
-    //Serial.println("delay");
+    Serial.println("delay");
   }
 }
 
@@ -66,7 +84,7 @@ void Motor::setStop()
   _neutral = 1;
   digitalWrite(_dir, LOW);
   digitalWrite(_lbrake, HIGH);
-  digitalWrite(_hbrake, LOW);
+  digitalWrite(_hbrake, HIGH);
   //delay(1000);
 }
 

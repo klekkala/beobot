@@ -8,7 +8,7 @@
 #include"PositionControl.h"
 #include"SpeedControl.h"
 
-const double defaultKP = 0.28;
+const double defaultKP = 0.01;
 
 PositionControl::PositionControl(SpeedControl *speedControl)
 {
@@ -40,15 +40,18 @@ void PositionControl::rotate(int degrees, int speed)
 		if (degrees < 0 && speed > 0) 
 		{
 			speed *= -1;
+      //_speedControl->setDir(0);
 		}
 		else if (speed < 0 && degrees > 0)
 		{
 			degrees *= -1;
+      //_speedControl->setDir(1);
 		}
 		else if (speed < 0 && degrees < 0)
 		{
 			degrees *= -1;
 			speed *= -1;
+      //_speedControl->setDir(0);
 		}
 		//_distance += _speedControl->getDistance();
 		_error = degrees;
