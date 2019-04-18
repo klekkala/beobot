@@ -80,12 +80,14 @@ if (delayRunning && ((millis() - delayStart) >= 1000000)) {
 // sets the motor to low brake
 void Motor::setStop()
 {
-  Serial.println("stop");
-  _neutral = 1;
-  digitalWrite(_dir, LOW);
-  digitalWrite(_lbrake, HIGH);
-  digitalWrite(_hbrake, HIGH);
-  //delay(1000);
+  if(!_neutral){
+    Serial.println("stop");
+    _neutral = 1;
+    digitalWrite(_dir, LOW);
+    digitalWrite(_lbrake, HIGH);
+     digitalWrite(_hbrake, HIGH);
+    delay(1000);
+  }
 }
 
 // sets the motor to high brake
@@ -106,8 +108,8 @@ void Motor::setPWM(int level)
   unsigned long time_now = 0;
   time_now = millis();*/
 	analogWrite(_pwm, level);
-  Serial.println("level pwm");
-  Serial.println(level);
+  //Serial.println("level pwm");
+  //Serial.println(level);
  /*
   //Serial.println("PWM is");
   //Serial.println(level);

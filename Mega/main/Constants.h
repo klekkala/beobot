@@ -25,7 +25,7 @@ const double kP = 0.028, kI = 0.001, kD = 0.0006;
 // delta T for speed calculation and PID adjustment
 const long deltaT = 50000;
 
-const int ticksPerRev = 15, wheelCirc = 76, wheelDist = 508;
+const int ticksPerRev = 45, wheelCirc = 76, wheelDist = 508;
 
 // pins for the encoder inputs
 #define RH_ENCODER_A 19

@@ -39,7 +39,7 @@ public:
   volatile unsigned long int0diff = 0;
   volatile unsigned long int1diff = 0;
   volatile unsigned long int2diff = 0;
-  volatile unsigned long threshold = 20000;
+  volatile unsigned long threshold = 12500;
 
 
 

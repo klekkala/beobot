@@ -29,6 +29,9 @@ void DifferentialDrive::drive(int translational, double angular)
 	int leftSpeed, rightSpeed;
 	findSpeeds(translational, angular, leftSpeed, rightSpeed);
 
+  Serial.println("leftSpeed");
+  Serial.println(leftSpeed);
+  Serial.println(rightSpeed);
 	_leftWheel->setSpeed(leftSpeed);
 	_rightWheel->setSpeed(rightSpeed);
 }
@@ -38,6 +41,8 @@ void DifferentialDrive::drive(int translational, double angular, int distance)
 	int leftSpeed, rightSpeed;
 	findSpeeds(translational, angular, leftSpeed, rightSpeed);
 
+  Serial.println(leftSpeed);
+  Serial.println(rightSpeed);
 	double radius = (double)translational / angular;
 	double phi = (double)distance / (double)radius;
 	int distanceDiff = phi * ((double)_wheelDistance / 2.0);

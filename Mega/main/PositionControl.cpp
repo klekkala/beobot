@@ -63,7 +63,7 @@ void PositionControl::adjustPWM()
 {
   int thisDistance = _speedControl->getDistance();
   _distance += thisDistance;
-  if (_positioning)
+  /*if (_positioning)
   {
     _error -= thisDistance;
     Serial.println("error is");
@@ -80,9 +80,9 @@ void PositionControl::adjustPWM()
     }
     Serial.println("speed is");
     Serial.println(newSpeed);
-    _speedControl->setSpeed(newSpeed);
+    _speedControl->setSpeed(newSpeed);*/
     _speedControl->adjustPWM();
-  }
+  //}
 }
 
 

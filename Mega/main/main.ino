@@ -94,7 +94,7 @@ void setup() {
   TCCR1A = 0;
   TCCR1B = 0;
   TCNT1  = 0;
-OCR1A = 1000;            // compare match register 16MHz/256/2Hz
+OCR1A = 1250;            // compare match register 16MHz/256/2Hz
   TCCR1B |= (1 << WGM12);   // CTC mode
   TCCR1B |= (1 << CS12);    // 256 prescaler 
   TIMSK1 |= (1 << OCIE1A);  // enable timer compare interrupt
@@ -109,10 +109,10 @@ OCR1A = 1000;            // compare match register 16MHz/256/2Hz
 ISR(TIMER1_COMPA_vect){
   //LeftEncoder.getSpeed(LeftMotor._forward);
   //Serial.println("timer");
-  if (once == 0){
+    
     //LeftSpeedControl.adjustPWM();
     //RightSpeedControl.adjustPWM();
-  }
+   //Driver.update();
 
 };
 
@@ -125,42 +125,55 @@ void loop() {
 
   //Serial.println(value[SWITCH]);
   //Some RC preprocessing
-  float vertical = map(value[VERTICAL], 1000, 2000, -100, 100)/100;
-  float horizontal = map(value[HORIZONTAL], 1000, 2000, 0, 100)/100;*/
+
   //Serial.println("Start");
   //Serial.println(digitalRead(LH_BRAKE));
-if (once == 1){
-  
-  
-  LeftMotor.setFwd();
-  //RightMotor.setFwd();
-  //LeftSpeedControl.setSpeed(360);
-  //RightSpeedControl.setSpeed(720);
-  once = 0;
-}
+    Serial.println("HELLO");
+    Serial.println(value[SCALE]);
+    Serial.println(value[HORIZONTAL]);
+    Serial.println(value[VERTICAL]);
+    Serial.println(value[SWITCH]);*/
+    
+  //Driver.drive(scale*vertical/100, scale*horizontal/100);
+ /*if (value[SWITCH] > 1500)
+    Driver.drive(0, 0);
+  else{
+    Serial.println("scalevertical");
+    int currvalue = value[SCALE]/10-100;
+    if(currvalue < 15){
+      currvalue = 15;
+    }
+    Serial.println(currvalue);
+    Driver.drive(currvalue, 0);
+  }*/
+  //LeftMotor.setFwd();
+  //LeftMotor.setPWM(70);
+  //LeftSpeedControl.setSpeed(9360);
+  //delay(1000000);
+  //RightSpeedControl.setSpeed(360);
 //delay(100000000);
 
   //Driver.drive(1, 0);
   //Drier.update();
 
-  /*LeftMotor.setFwd();
-  LeftMotor.setPWM(90);*/
+  //LeftMotor.setFwd();
+  //LeftMotor.setPWM(100);
 //Test for motors
   /*//RightMotor.setBack();
   LeftMotor.setFwd();
   //RightMotor.setPWM(150);
   LeftMotor.setPWM(130);
   delay(415);
-  LeftMotor.setPWM(0);
-  delay(4000);
-    counts = LeftEncoder.getCounts();
+  LeftMotor.setPWM(0);*/
+  //delay(4000);
+    /*counts = LeftEncoder.getCounts();
     Serial.println("A");
     Serial.println(counts.tickA);
     Serial.println("B");
     Serial.println(counts.tickB);
     Serial.println("C");
-    Serial.println(counts.tickC);
-
+    Serial.println(counts.tickC);*/
+/*
     LeftMotor.setBack();
     LeftMotor.setPWM(180);
     delay(415);

@@ -39,7 +39,7 @@ Encoder::Encoder(int encoderA, int encoderB, int encoderC,
 // MUST be called every _deltaT microseconds to return accurate speed
 int Encoder::getSpeed(bool forward)
 {
-  if(forward == 1){
+  /*if(forward == 1){
     _count = min(_rawCounts.tickA, min(_rawCounts.tickB, _rawCounts.tickC));
    _rawCounts.tickA = _count;
   _rawCounts.tickB = _count;
@@ -50,7 +50,7 @@ int Encoder::getSpeed(bool forward)
    _rawCounts.tickA = _count;
   _rawCounts.tickB = _count;
   _rawCounts.tickC = _count;
-  }
+  }*/
   
   _oldCount = _newCount;
   _newCount = _count;
@@ -74,6 +74,8 @@ int Encoder::getSpeed(bool forward)
   {
     degPerSec = _lastSpeed;
   }
+  Serial.println("real speed");
+  Serial.println(degPerSec);
   return degPerSec;
 }
 
@@ -112,9 +114,11 @@ void Encoder::updateCountA(bool forward)
     //Serial.println(_marker);
   if(forward == 1){
     _rawCounts.tickA++;
+    _count++;
   }
   else{
     _rawCounts.tickA--;
+    _count--;
   }
   int0time = micros();
 }
@@ -133,9 +137,11 @@ void Encoder::updateCountB(bool forward)
     //Serial.println(_marker);
   if(forward == 1){
     _rawCounts.tickB++;
+    _count++;
   }
   else{
     _rawCounts.tickB--;
+    _count--;
   }
   int1time = micros();
 }
@@ -154,9 +160,11 @@ void Encoder::updateCountC(bool forward)
         //Serial.println(_marker);
   if(forward == 1){
     _rawCounts.tickC++;
+    _count++;
   }
   else{
     _rawCounts.tickC--;
+    _count--;
   }
   int2time = micros();
   }
