@@ -108,8 +108,8 @@ void Motor::setPWM(int level)
   unsigned long time_now = 0;
   time_now = millis();*/
 	analogWrite(_pwm, level);
-  //Serial.println("level pwm");
-  //Serial.println(level);
+  Serial.println("level pwm");
+  Serial.println(level);
  /*
   //Serial.println("PWM is");
   //Serial.println(level);

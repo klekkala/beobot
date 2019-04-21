@@ -39,9 +39,9 @@ SpeedControl::SpeedControl(Motor *motor, Encoder *encoder)
 // sets the PID gains to the given values
 void SpeedControl::setGains(double kP, double kI, double kD)
 {
-	_kP = 0.003;
-	_kI = kI;
-	_kD = kD;
+	_kP = 0.1;
+	_kI = 0.0;
+	_kD = 0.05;
 }
 
 // accepts an int as a parameter
@@ -100,9 +100,9 @@ void SpeedControl::adjustPWM()
   int speed = _encoder->getSpeed(_motor->_forward); // motor control returns vector speed
   if (speed < 0) speed *= -1;  // convert speed to scalar
   int error = _setPoint - speed;
-  //_iTerm += (_kI * (double)error);
-  //double dInput = speed - _lastSpeed;
-  int adjustment = (_kP * (double)error);
+  _iTerm += (_kI * (double)error);
+  double dInput = speed - _lastSpeed;
+  int adjustment = (_kP * (double)error) + _iTerm - (_kD * dInput);
   Serial.println("setpoint");
   Serial.println(_setPoint);
    /* Serial.println("pwm");

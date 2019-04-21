@@ -91,48 +91,90 @@ void setup() {
   //digitalWrite(11, HIGH);
 
   noInterrupts();           // disable all interrupts
+  /*TCCR2A = 0;     // set entire TCCR3A register to 0
+  TCCR2B = 0;     // same for TCCR3B
+  TCNT2  = 1000;
+  OCR2A = 2000;
+  TCCR2B |= (1 << WGM22);
+  TCCR2B |= (1 << CS22);
+  TIMSK2 |= (1 << OCIE2A);*/
+  
   TCCR1A = 0;
   TCCR1B = 0;
   TCNT1  = 0;
-OCR1A = 1250;            // compare match register 16MHz/256/2Hz
+  OCR1A = 1500;            // compare match register 16MHz/256/2Hz
   TCCR1B |= (1 << WGM12);   // CTC mode
-  TCCR1B |= (1 << CS12);    // 256 prescaler 
+  TCCR1B |= (1 << 0x02);    // 256 prescaler 
   TIMSK1 |= (1 << OCIE1A);  // enable timer compare interrupt
+  
+  TCCR3A = 0;     // set entire TCCR3A register to 0
+  TCCR3B = 0;     // same for TCCR3B
+  TCNT3  = 3500;
+  OCR3A = 5000;
+  TCCR3B |= (1 << WGM32);
+  // Set CS10 and CS12 bits for 1024 prescaler:
+  TCCR3B |= (1 << 0x02);
+  // enable timer compare interrupt:
+  TIMSK3 |= (1 << OCIE3A);
+
+  TCCR4A = 0;
+  TCCR4B = 0;
+  TCNT4  = 7500;
+  OCR4A = 9000;            // compare match register 16MHz/256/2Hz
+  TCCR4B |= (1 << WGM42);   // CTC mode
+  TCCR4B |= (1 << 0x02);    // 256 prescaler 
+  TIMSK4 |= (1 << OCIE4A);  // enable timer compare interrupt*/
+  
   interrupts();             // enable all interrupts
   //Serial writing
   Serial.begin(115200);
 
 }
 
-
+/*
 //Timer2 Overflow Interrupt Vector, called every 1ms
-ISR(TIMER1_COMPA_vect){
+ISR(TIMER2_OVF_vect){
   //LeftEncoder.getSpeed(LeftMotor._forward);
   //Serial.println("timer");
     
     //LeftSpeedControl.adjustPWM();
     //RightSpeedControl.adjustPWM();
    //Driver.update();
+   Serial.println("HELLO");
+        TCNT2 = 1;           //Reset Timer to 130 out of 255
+  TIFR2 = 0x00;          //Timer2 INT Flag Reg: Clear Timer Overflow Flag
+
+};*/
+
+
+//Timer2 Overflow Interrupt Vector, called every 1ms
+ISR(TIMER1_COMPA_vect){
+  value[VERTICAL] = pulseIn(channel[VERTICAL], HIGH, 50000); // Read the pulse width of
+  Serial.println(value[VERTICAL]);
+  //Serial.println("hello");
+  TCNT1  = 0;
 
 };
 
- 
+//Timer2 Overflow Interrupt Vector, called every 1ms
+ISR(TIMER3_COMPA_vect){
+  value[HORIZONTAL] = pulseIn(channel[HORIZONTAL], HIGH, 50000); // Read the pulse width of
+  Serial.println(value[HORIZONTAL]);
+  TCNT3  = 3500;
+
+};
+
+//Timer2 Overflow Interrupt Vector, called every 1ms
+ISR(TIMER4_COMPA_vect){
+  value[SWITCH] = pulseIn(channel[SWITCH], HIGH, 50000); // Read the pulse width of
+  Serial.println(value[SWITCH]);
+  TCNT4  = 7500;
+
+};
+
 void loop() {
   
-  /*for(int i=0; i<6; i++){
-    value[i] = pulseIn(channel[i], HIGH, 250000); // Read the pulse width of
-  }
-
-  //Serial.println(value[SWITCH]);
-  //Some RC preprocessing
-
-  //Serial.println("Start");
-  //Serial.println(digitalRead(LH_BRAKE));
-    Serial.println("HELLO");
-    Serial.println(value[SCALE]);
-    Serial.println(value[HORIZONTAL]);
-    Serial.println(value[VERTICAL]);
-    Serial.println(value[SWITCH]);*/
+//Serial.println("loosdfsdfasdfas");
     
   //Driver.drive(scale*vertical/100, scale*horizontal/100);
  /*if (value[SWITCH] > 1500)
@@ -147,8 +189,8 @@ void loop() {
     Driver.drive(currvalue, 0);
   }*/
   //LeftMotor.setFwd();
-  //LeftMotor.setPWM(70);
-  //LeftSpeedControl.setSpeed(9360);
+  //LeftMotor.setPWM(75);
+  //LeftSpeedControl.setSpeed(0);
   //delay(1000000);
   //RightSpeedControl.setSpeed(360);
 //delay(100000000);
@@ -173,8 +215,8 @@ void loop() {
     Serial.println(counts.tickB);
     Serial.println("C");
     Serial.println(counts.tickC);*/
-/*
-    LeftMotor.setBack();
+
+    /*LeftMotor.setBack();
     LeftMotor.setPWM(180);
     delay(415);
     LeftMotor.setPWM(0);
@@ -186,7 +228,7 @@ void loop() {
     Serial.println(counts.tickB);
     Serial.println("C");
     Serial.println(counts.tickC);
-    delay(100000000);
+    delay(100000000);*/
     //Serial.println(LeftEncoder.getDistance());
    //delay(100);*/
      /*counts = LeftEncoder.getCounts();
