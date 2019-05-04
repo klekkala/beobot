@@ -12,7 +12,7 @@ class DifferentialDrive
 {
 public:
 	DifferentialDrive(PositionControl*, PositionControl*, int wheelCirc, int wheelDistance);
-	void drive(int translational, double angular);
+	void drive(int translational, double angular, bool back);
 	void drive(int translational, double angular, int distance);
 	void getPosition(double &x, double &y, double &theta);
 	void resetPosition();

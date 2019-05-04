@@ -51,6 +51,7 @@ private:
 	long _deltaT; // in microseconds
 	int _lastSpeed;
 	volatile long _totalCount;
+  long _oldtime;
   TickCounts _rawCounts;
 };
 

@@ -73,7 +73,6 @@ if (delayRunning && ((millis() - delayStart) >= 1000000)) {
     _forward = 0;
     _neutral = 0;
     //_clutch = 0;
-    Serial.println("delay");
   }
 }
 
@@ -86,7 +85,7 @@ void Motor::setStop()
     digitalWrite(_dir, LOW);
     digitalWrite(_lbrake, HIGH);
      digitalWrite(_hbrake, HIGH);
-    delay(1000);
+    //delay(1000);
   }
 }
 
@@ -108,8 +107,8 @@ void Motor::setPWM(int level)
   unsigned long time_now = 0;
   time_now = millis();*/
 	analogWrite(_pwm, level);
-  Serial.println("level pwm");
-  Serial.println(level);
+  //Serial.println("level pwm");
+  //Serial.println(level);
  /*
   //Serial.println("PWM is");
   //Serial.println(level);

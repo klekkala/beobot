@@ -15,7 +15,7 @@
 class SpeedControl
 {
 public:
-	SpeedControl(Motor *motor, Encoder *encoder);
+	SpeedControl(Motor *motor, Encoder *encoder, int basevel);
 	void setGains(double kP, double kI, double kD);
 	void setSpeed(int speed); // in degrees/s
   void setDir(bool dir);
@@ -29,6 +29,7 @@ private:
 	Encoder *_encoder;
 	void constrainPWM();
   bool _direction;
+  int _basevel;
 };
 
 #endif

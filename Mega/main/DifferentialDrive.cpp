@@ -24,12 +24,36 @@ DifferentialDrive::DifferentialDrive(PositionControl *lhWheel,
 	_degreesPerMillimeter = 360.0 / (double)wheelCirc;
 }
 
-void DifferentialDrive::drive(int translational, double angular)
+void DifferentialDrive::drive(int translational, double angular, bool back)
 {
 	int leftSpeed, rightSpeed;
 	findSpeeds(translational, angular, leftSpeed, rightSpeed);
 
-  Serial.println("leftSpeed");
+  
+  if(back == false){
+  if(leftSpeed < 0)
+    leftSpeed = 0;
+  if(rightSpeed < 0)
+    rightSpeed = 0;
+  }
+
+  else{
+      if(leftSpeed > 0 and rightSpeed > 0){
+        leftSpeed = -leftSpeed;
+        rightSpeed = -rightSpeed;
+      }
+    else{  
+  if(leftSpeed < 0){
+    leftSpeed = 0;
+    rightSpeed = -rightSpeed;
+  }
+  if(rightSpeed < 0)
+    rightSpeed = 0;
+    leftSpeed = -leftSpeed;
+    }
+  }
+
+  Serial.println("lsjdfkl");
   Serial.println(leftSpeed);
   Serial.println(rightSpeed);
 	_leftWheel->setSpeed(leftSpeed);
@@ -41,8 +65,8 @@ void DifferentialDrive::drive(int translational, double angular, int distance)
 	int leftSpeed, rightSpeed;
 	findSpeeds(translational, angular, leftSpeed, rightSpeed);
 
-  Serial.println(leftSpeed);
-  Serial.println(rightSpeed);
+  //Serial.println(leftSpeed);
+  //Serial.println(rightSpeed);
 	double radius = (double)translational / angular;
 	double phi = (double)distance / (double)radius;
 	int distanceDiff = phi * ((double)_wheelDistance / 2.0);

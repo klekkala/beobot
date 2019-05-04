@@ -32,6 +32,7 @@ Encoder::Encoder(int encoderA, int encoderB, int encoderC,
   _rawCounts.tickA = 0;
   _rawCounts.tickB = 0;
   _rawCounts.tickC = 0;
+  _oldtime = 0;
 }
 
 // returns the average speed of the motor output shaft in degrees/second
@@ -56,17 +57,18 @@ int Encoder::getSpeed(bool forward)
   _newCount = _count;
   // calculate number of ticks elapsed since in last deltaT
  //Serial.println("infunc");
- //Serial.println(_newCount);
- //Serial.println(_oldCount);
   int difference = _newCount - _oldCount;
+  
   // update _totalCount
   _totalCount += difference;
   int degPerSec;
   // calculate new speed if _count has not overflowed 
   if (difference < 50000 && difference > -50000)
   {
-    double deltaTInSec = 1000000 / _deltaT;
+    double deltaTInSec = 1000.00/(double)(millis()-_oldtime);
     double ticksPerSec = (double)difference * (double)deltaTInSec;
+    //Serial.println(deltaTInSec);
+    //Serial.println(difference);
     degPerSec = ticksPerSec * _degPerTick;
     _lastSpeed = degPerSec;
   }
@@ -76,6 +78,7 @@ int Encoder::getSpeed(bool forward)
   }
   Serial.println("real speed");
   Serial.println(degPerSec);
+  _oldtime = millis();
   return degPerSec;
 }
 

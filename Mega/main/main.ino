@@ -6,7 +6,10 @@
 #include "Motor.h"
 #include "PositionControl.h"
 #include "SpeedControl.h"
-
+#include <Wire.h>
+#include "Adafruit_MCP4725.h"
+//MCP4725 library
+Adafruit_MCP4725 dac;
 const uint32_t PRINT_PERIOD = 1e6;  // print counts every second
 
 
@@ -16,8 +19,8 @@ Motor RightMotor = Motor(RH_REVERSE, RH_STOP, RH_BRAKE, RH_PWM);
 Encoder LeftEncoder = Encoder(LH_ENCODER_B, LH_ENCODER_C, LH_ENCODER_A, deltaT, ticksPerRev);
 Encoder RightEncoder = Encoder(RH_ENCODER_A, RH_ENCODER_C, RH_ENCODER_B, deltaT, ticksPerRev);
 
-SpeedControl LeftSpeedControl = SpeedControl(&LeftMotor, &LeftEncoder);
-SpeedControl RightSpeedControl = SpeedControl(&RightMotor, &RightEncoder);
+SpeedControl LeftSpeedControl = SpeedControl(&LeftMotor, &LeftEncoder, 70);
+SpeedControl RightSpeedControl = SpeedControl(&RightMotor, &RightEncoder, 164);
 
 //LeftSpeedControl.setGains(kP, kI, kD);
 //RightSpeedControl.setGains(kP, kI, kD);
@@ -39,23 +42,23 @@ bool enc0_5 = 1;
 bool once = 1;
 void setup() {
 
-  LeftSpeedControl.setGains(kP, kI, kD);
-  RightSpeedControl.setGains(kP, kI, kD);
+  LeftSpeedControl.setGains(0.004, 0, 0.005);
+  RightSpeedControl.setGains(0.009, 0, 0.005);
   //Left Encoder declarations
-  pinMode(LH_ENCODER_A, INPUT);
+  /*pinMode(LH_ENCODER_A, INPUT);
   pinMode(LH_ENCODER_B, INPUT);
   pinMode(LH_ENCODER_C, INPUT);
   attachInterrupt(0, LeftupdateCountA, RISING);//Initialize the interrupt pin
   attachInterrupt(1, LeftupdateCountB, RISING);//Initialize the interrupt pin
-  attachInterrupt(5, LeftupdateCountC, RISING);//Initialize the interrupt pin
+  attachInterrupt(5, LeftupdateCountC, RISING);//Initialize the interrupt pin*/
 
   //Right Encoder declarations
   pinMode(RH_ENCODER_A, INPUT);
   pinMode(RH_ENCODER_B, INPUT);
   pinMode(RH_ENCODER_C, INPUT);
-  attachInterrupt(2, RightupdateCountA, RISING);//Initialize the interrupt pin
-  attachInterrupt(3, RightupdateCountB, RISING);//Initialize the interrupt pin
-  attachInterrupt(4, RightupdateCountC, RISING);//Initialize the interrupt pin
+  attachInterrupt(0, RightupdateCountA, RISING);//Initialize the interrupt pin
+  attachInterrupt(1, RightupdateCountB, RISING);//Initialize the interrupt pin
+  attachInterrupt(5, RightupdateCountC, RISING);//Initialize the interrupt pin
 
 
   //RC declarations
@@ -84,45 +87,39 @@ void setup() {
   //digitalWrite(RH_STOP, HIGH);
   pinMode(RH_REVERSE, OUTPUT);
   //digitalWrite(RH_REVERSE, HIGH);
-
   //pinMode(4, OUTPUT);
   //pinMode(5, OUTPUT);
   //pinMode(11, OUTPUT);
   //digitalWrite(11, HIGH);
-
+dac.begin(0x60);
   noInterrupts();           // disable all interrupts
+
+
+  
   /*TCCR2A = 0;     // set entire TCCR3A register to 0
   TCCR2B = 0;     // same for TCCR3B
-  TCNT2  = 1000;
-  OCR2A = 2000;
+  TCNT2  = 0;
+  OCR2A = 0;
   TCCR2B |= (1 << WGM22);
   TCCR2B |= (1 << CS22);
-  TIMSK2 |= (1 << OCIE2A);*/
-  
-  TCCR1A = 0;
-  TCCR1B = 0;
-  TCNT1  = 0;
-  OCR1A = 1500;            // compare match register 16MHz/256/2Hz
-  TCCR1B |= (1 << WGM12);   // CTC mode
-  TCCR1B |= (1 << 0x02);    // 256 prescaler 
-  TIMSK1 |= (1 << OCIE1A);  // enable timer compare interrupt
+  TIMSK2 |= (1 << OCIE2A);
   
   TCCR3A = 0;     // set entire TCCR3A register to 0
   TCCR3B = 0;     // same for TCCR3B
-  TCNT3  = 3500;
-  OCR3A = 5000;
+  TCNT3  = 0;
+  OCR3A = 1500;
   TCCR3B |= (1 << WGM32);
   // Set CS10 and CS12 bits for 1024 prescaler:
-  TCCR3B |= (1 << 0x02);
+  TCCR3B |= (1 << CS32);
   // enable timer compare interrupt:
   TIMSK3 |= (1 << OCIE3A);
 
   TCCR4A = 0;
   TCCR4B = 0;
-  TCNT4  = 7500;
-  OCR4A = 9000;            // compare match register 16MHz/256/2Hz
+  TCNT4  = 0;
+  OCR4A = 1500;            // compare match register 16MHz/256/2Hz
   TCCR4B |= (1 << WGM42);   // CTC mode
-  TCCR4B |= (1 << 0x02);    // 256 prescaler 
+  TCCR4B |= (1 << CS42);    // 256 prescaler 
   TIMSK4 |= (1 << OCIE4A);  // enable timer compare interrupt*/
   
   interrupts();             // enable all interrupts
@@ -131,52 +128,96 @@ void setup() {
 
 }
 
-/*
 //Timer2 Overflow Interrupt Vector, called every 1ms
-ISR(TIMER2_OVF_vect){
-  //LeftEncoder.getSpeed(LeftMotor._forward);
-  //Serial.println("timer");
-    
-    //LeftSpeedControl.adjustPWM();
-    //RightSpeedControl.adjustPWM();
-   //Driver.update();
-   Serial.println("HELLO");
-        TCNT2 = 1;           //Reset Timer to 130 out of 255
-  TIFR2 = 0x00;          //Timer2 INT Flag Reg: Clear Timer Overflow Flag
+/*ISR(TIMER2_COMPA_vect){
+  /*value[SWITCH] = pulseIn(channel[VERTICAL], HIGH, 50000); // Read the pulse width of
+  value[SWITCH] = pulseIn(channel[VERTICAL], HIGH, 50000); // Read the pulse width of
+  value[SWITCH] = pulseIn(channel[VERTICAL], HIGH, 50000); // Read the pulse width of
+  value[SWITCH] = pulseIn(channel[VERTICAL], HIGH, 50000); // Read the pulse width of*/
+  /*if(value[SWITCH] <1200)
+    LKSJDFKL;
+  else if(value[SWITCH] == 23){
+    LSKDJFKLJ;
+  }
+  else if(value[SWITCH] ==34){
+    SDFSADF;
+  }
+   value[HORIZONTAL] = pulseIn(channel[HORIZONTAL], HIGH, 25000); // Read the pulse width of
+   value[VERTICAL] = pulseIn(channel[VERTICAL], HIGH, 25000); // Read the pulse width of
+  value[STOP] = pulseIn(channel[STOP], HIGH, 25000); // Read the pulse width of
+  //value[SWITCH] = pulseIn(channel[SWITCH], HIGH, 50000); // Read the pulse width of
+  //value[SCALE] = pulseIn(channel[SCALE], HIGH, 50000); // Read the pulse width of
+  //RightSpeedControl.setSpeed(1000);
+
+  //float scale = map(value[SCALE], 990, 2000, 0, 100);
+  //float horizontal = map(value[HORIZONTAL], 990, 2000, 0, 100);
+  //float vertical = map(value[VERTICAL], 990, 2000, 0, 100);
+  //Serial.println("hi");
+  //LeftSpeedControl.adjustPWM();
+  //RightSpeedControl.adjustPWM();
+  //Driver.update();
+  TCNT2  = 0;
 
 };*/
 
+bool back = false;
 
 //Timer2 Overflow Interrupt Vector, called every 1ms
-ISR(TIMER1_COMPA_vect){
-  value[VERTICAL] = pulseIn(channel[VERTICAL], HIGH, 50000); // Read the pulse width of
-  Serial.println(value[VERTICAL]);
-  //Serial.println("hello");
+/*ISR(TIMER1_COMPA_vect){
+
+  //Serial.println("hi");
+  //LeftSpeedControl.adjustPWM();
+  //RightSpeedControl.adjustPWM();
+  //Driver.update();
   TCNT1  = 0;
 
-};
-
-//Timer2 Overflow Interrupt Vector, called every 1ms
-ISR(TIMER3_COMPA_vect){
-  value[HORIZONTAL] = pulseIn(channel[HORIZONTAL], HIGH, 50000); // Read the pulse width of
-  Serial.println(value[HORIZONTAL]);
-  TCNT3  = 3500;
-
-};
-
-//Timer2 Overflow Interrupt Vector, called every 1ms
-ISR(TIMER4_COMPA_vect){
-  value[SWITCH] = pulseIn(channel[SWITCH], HIGH, 50000); // Read the pulse width of
-  Serial.println(value[SWITCH]);
-  TCNT4  = 7500;
-
-};
-
+};*/
 void loop() {
-  
-//Serial.println("loosdfsdfasdfas");
-    
-  //Driver.drive(scale*vertical/100, scale*horizontal/100);
+    /*value[HORIZONTAL] = pulseIn(channel[HORIZONTAL], HIGH, 50000); // Read the pulse width of
+  value[VERTICAL] = pulseIn(channel[VERTICAL], HIGH, 50000); // Read the pulse width of
+  value[STOP] = pulseIn(channel[STOP], HIGH, 50000); // Read the pulse width of
+  value[SWITCH] = pulseIn(channel[SWITCH], HIGH, 50000); // Read the pulse width of
+  value[SCALE] = pulseIn(channel[SCALE], HIGH, 50000); // Read the pulse width of
+  //RightSpeedControl.setSpeed(1000);
+
+
+  if (value[HORIZONTAL] == 0.0 or value[VERTICAL] == 0.0 or value[SCALE] == 0.0 or value[SWITCH] == 0.0){
+    delay(1000);
+  }
+  else{
+  float scale = map(value[SCALE], 990, 2000, 0, 150);
+  float horizontal = map(value[HORIZONTAL], 990, 2000, -5, 5);
+  float vertical = map(value[VERTICAL], 990, 2000, 0, 100);
+
+ if (horizontal < 2 and horizontal > -2)
+  horizontal = 0;
+ else if (horizontal < -2){
+  horizontal = horizontal + 2;
+ }
+
+  else if(horizontal > 2){
+  horizontal = horizontal - 2;
+ }
+  //RightSpeedControl.setSpeed(720);
+  //Serial.println(testkp*0.001);
+  //Serial.println("loop");
+  if (value[STOP] < 1500)
+    back = true;
+  else
+    back = false;
+
+    //Serial.println(scale*vertical/100);
+  //LeftSpeedControl.setSpeed(1000);
+  //RightSpeedControl.setSpeed(1000);
+  //LeftSpeedControl.adjustPWM();
+  //RightSpeedControl.adjustPWM();
+  Driver.drive(scale*vertical/100, horizontal, back);
+  Driver.update();
+  if (value[SWITCH] > 1500){
+    LeftMotor.setStop();
+    RightMotor.setStop();
+  }
+  }*/
  /*if (value[SWITCH] > 1500)
     Driver.drive(0, 0);
   else{
@@ -188,11 +229,46 @@ void loop() {
     Serial.println(currvalue);
     Driver.drive(currvalue, 0);
   }*/
-  //LeftMotor.setFwd();
-  //LeftMotor.setPWM(75);
-  //LeftSpeedControl.setSpeed(0);
+  //value[SCALE] = pulseIn(channel[SCALE], HIGH, 50000);
+  RightMotor.setFwd();
+  for(int i=1100; i< 1201;i++){
+    //loat scale = map(value[SCALE], 990, 2000,  , 255);
+    Serial.println(i);
+    dac.setVoltage(i, false);
+    RightEncoder.getSpeed(RightMotor._forward);
+    delay(400);
+  }
+  //LeftMotor.setPWM(scale);
+  /*for(int j=60; kj<110; j++){
+    Serial.println("start of pwm");
+    Serial.println(j);
+    LeftMotor.setPWM(j);
+    delay(2000);
+    Serial.println("left");
+    LeftEncoder.getSpeed(LeftMotor._forward);
+    LeftEncoder.getDistance();
+    
+    RightMotor.setPWM(j);
+    delay(2000);
+    Serial.println("right");
+    RightEncoder.getSpeed(RightMotor._forward);
+    RightEncoder.getDistance();
+  }*/
+    /*LeftMotor.setPWM(76);
+    delay(1000);
+    Serial.println("left");
+    LeftEncoder.getSpeed(LeftMotor._forward);
+    LeftEncoder.getDistance();
+    
+    RightMotor.setPWM(169);
+    delay(1000);
+    Serial.println("right");
+    RightEncoder.getSpeed(RightMotor._forward);
+    RightEncoder.getDistance();*/
+    
+  //LeftSpeedControl.setSpeed(16);
   //delay(1000000);
-  //RightSpeedControl.setSpeed(360);
+  //RightSpeedControl.setSpeed(160);
 //delay(100000000);
 
   //Driver.drive(1, 0);
@@ -216,12 +292,12 @@ void loop() {
     Serial.println("C");
     Serial.println(counts.tickC);*/
 
-    /*LeftMotor.setBack();
-    LeftMotor.setPWM(180);
-    delay(415);
-    LeftMotor.setPWM(0);
-    delay(4000);
-        counts = LeftEncoder.getCounts();
+    /*RightMotor.setBack();
+    RightMotor.setPWM(180);
+    //delay(415);
+    //LeftMotor.setPWM(0);
+    //delay(4000);
+    counts = RightEncoder.getCounts();
     Serial.println("A");
     Serial.println(counts.tickA);
     Serial.println("B");
@@ -253,47 +329,14 @@ void loop() {
 }
 
 void LeftupdateCountA(){
-  /*detachInterrupt(5);
-  enc0_5 = 0;
-  if(enc0_0 == 0)
-    attachInterrupt(0, LeftupdateCountA, RISING);
-  if(enc0_1 == 0)
-    attachInterrupt(1, LeftupdateCountB, RISING);*/
-  /*if (digitalRead(18) == HIGH)
-    LeftEncoder.updateCountC_up();
-  else{
-    LeftEncoder.updateCountC();
-  }*/
   LeftEncoder.updateCountA(LeftMotor._forward);
 }
 
 void LeftupdateCountB(){
-  /*detachInterrupt(5);
-  enc0_5 = 0;
-  if(enc0_0 == 0)
-    attachInterrupt(0, LeftupdateCountA, RISING);
-  if(enc0_1 == 0)
-    attachInterrupt(1, LeftupdateCountB, RISING);*/
-  /*if (digitalRead(18) == HIGH)
-    LeftEncoder.updateCountC_up();
-  else{
-    LeftEncoder.updateCountC();
-  }*/
   LeftEncoder.updateCountB(LeftMotor._forward);
 }
 
 void LeftupdateCountC(){
-  /*detachInterrupt(5);
-  enc0_5 = 0;
-  if(enc0_0 == 0)
-    attachInterrupt(0, LeftupdateCountA, RISING);
-  if(enc0_1 == 0)
-    attachInterrupt(1, LeftupdateCountB, RISING);*/
-  /*if (digitalRead(18) == HIGH)
-    LeftEncoder.updateCountC_up();
-  else{
-    LeftEncoder.updateCountC();
-  }*/
   LeftEncoder.updateCountC(LeftMotor._forward);
 }
 

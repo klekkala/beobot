@@ -15,7 +15,7 @@ const double defaultGain = 0.0;
 
 // accepts a pointer to a Motor and a pointer to an Encoder as parameters
 // sets gains to 1.0 and minimum speed to 60 by default
-SpeedControl::SpeedControl(Motor *motor, Encoder *encoder)
+SpeedControl::SpeedControl(Motor *motor, Encoder *encoder, int basevel)
 {
 	_encoder = encoder;
 	_motor = motor;
@@ -23,7 +23,7 @@ SpeedControl::SpeedControl(Motor *motor, Encoder *encoder)
 	_pwm = 0;
 	_lastSpeed = 0;
   _direction = 1;
-
+  _basevel = basevel;
 	_kP = 0.01;
 	_kI = defaultGain;
 	_kD = defaultGain;
@@ -39,9 +39,9 @@ SpeedControl::SpeedControl(Motor *motor, Encoder *encoder)
 // sets the PID gains to the given values
 void SpeedControl::setGains(double kP, double kI, double kD)
 {
-	_kP = 0.1;
-	_kI = 0.0;
-	_kD = 0.05;
+	_kP = kP;
+	_kI = kI;
+	_kD = kD;
 }
 
 // accepts an int as a parameter
@@ -75,7 +75,7 @@ void SpeedControl::setSpeed(int speed)
 	}
 	if (speed == 0)
 	{
-		_motor->setStop();
+		//_motor->setStop();
     Serial.println("stop");
 	}
   //Serial.print(_minSpeed);
@@ -103,14 +103,14 @@ void SpeedControl::adjustPWM()
   _iTerm += (_kI * (double)error);
   double dInput = speed - _lastSpeed;
   int adjustment = (_kP * (double)error) + _iTerm - (_kD * dInput);
-  Serial.println("setpoint");
-  Serial.println(_setPoint);
+  //Serial.println("setpoint");
+  //Serial.println(_setPoint);
    /* Serial.println("pwm");
   Serial.println(_pwm);
   Serial.println("adjust");
   Serial.println(adjustment);*/
- Serial.println("speed");
-  Serial.println(speed);
+ //Serial.println("speed");
+  //Serial.println(speed);
   _pwm += adjustment;
   constrainPWM();
   _motor->setPWM(_pwm);
@@ -120,12 +120,12 @@ void SpeedControl::adjustPWM()
 void SpeedControl::constrainPWM()
 {
 	if (_direction == 1){
-	  if (_pwm > 130) _pwm = 130;
-    else if (_pwm < 70) _pwm = 70;
+	  if (_pwm < _basevel) _pwm = _basevel;
+    else if (_pwm > 255) _pwm = 255;
 	}
 
   else{
-    if (_pwm > 180) _pwm = 180;
-    else if (_pwm < 150) _pwm = 150;
+    if (_pwm < _basevel) _pwm = _basevel;
+    else if (_pwm > 255) _pwm = 255;
   }
 }
