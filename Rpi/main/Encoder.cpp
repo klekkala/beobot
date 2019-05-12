@@ -76,8 +76,7 @@ int Encoder::getSpeed(bool forward)
   {
     degPerSec = _lastSpeed;
   }
-  Serial.println("real speed");
-  Serial.println(degPerSec);
+
   _oldtime = millis();
   return degPerSec;
 }
@@ -112,9 +111,6 @@ void Encoder::updateCountA(bool forward)
   if ( int0diff < threshold )
     return;
   else{
-      //Serial.println("A");
-    //Serial.println(int0diff);
-    //Serial.println(_marker);
   if(forward == 1){
     _rawCounts.tickA++;
     _count++;
@@ -135,9 +131,6 @@ void Encoder::updateCountB(bool forward)
   if ( int1diff < threshold )
     return;
   else{
-    //Serial.println("B");
-    //Serial.println(int1diff);
-    //Serial.println(_marker);
   if(forward == 1){
     _rawCounts.tickB++;
     _count++;
@@ -158,9 +151,6 @@ void Encoder::updateCountC(bool forward)
   if ( int2diff < threshold )
     return;
   else{
-      //Serial.println("C");
-    //Serial.println(int2diff);
-        //Serial.println(_marker);
   if(forward == 1){
     _rawCounts.tickC++;
     _count++;
