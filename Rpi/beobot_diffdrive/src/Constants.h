@@ -9,7 +9,18 @@
 #ifndef Constants_h
 #define Constants_h
 
+#define RH_PWM 6 // PWM pin for right hand motor
+#define RH_BRAKE 37 // direction control for right hand motor BIN1 pin on motor controller
+#define RH_STOP 37 // direction control for right hand motor BIN1 pin on motor controller
+#define RH_REVERSE 35 // direction control for right hand motor BIN2 pin on motor controller
 
+#define LH_PWM 5 // PWM pin for left hand motor
+#define LH_BRAKE 36 // direction control for right hand motor AIN1 pin on motor controller
+#define LH_STOP 36 // direction control for right hand motor AIN1 pin on motor controller
+#define LH_REVERSE 34 // direction control for left hand motor AIN2 pin on motor controller
+
+// gain values for PID motor control
+const double kP = 0.028, kI = 0.001, kD = 0.0006;
 
 // delta T for speed calculation and PID adjustment
 const long deltaT = 50000;
