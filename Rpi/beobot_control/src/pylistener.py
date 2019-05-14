@@ -4,14 +4,19 @@
 
 # Import required Python code.
 import rospy
+import time
 
 # Import custom message data.
 from node_example.msg import NodeExampleData
 
+dacl = Adafruit_MCP4725.MCP4725(address=0x61, busnum=1)
+dacr = Adafruit_MCP4725.MCP4725(address=0x60, busnum=1)
 
 def callback(data):
     """Handle subscriber data."""
     # Simply print out values in our custom message.
+    dacl.setvoltage(data.a, True)
+    dacr.setvoltage(data.b, True)
     rospy.loginfo("%s: I heard %s, a + b = %d", rospy.get_name(), data.message,
                   data.a + data.b)
 
