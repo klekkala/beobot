@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>rospy_tutorials</name>
+  <name>beobot_control</name>
   <version>0.9.1</version>
   <description>
     This package attempts to show the features of ROS python API step-by-step,

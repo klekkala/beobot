@@ -44,8 +44,8 @@ dacl = Adafruit_MCP4725.MCP4725(address=0x61, busnum=1)
 dacr = Adafruit_MCP4725.MCP4725(address=0x60, busnum=1)
 
 def callback(data):
-    dacl.setvoltage(data.a, True)
-    dacr.setvoltage(data.b, True)
+    dacl.set_voltage(1500+data.a, False)
+    dacr.set_voltage(1500+data.b, False)
     rospy.loginfo(rospy.get_caller_id() + 'I heard %s', data.a)
 
 def listener():
