@@ -86,7 +86,8 @@ int Encoder::getSpeed(bool forward)
 // should be called regularly to prevent overflows in _totalCount
 int Encoder::getDistance()
 {
-  int distance = _degPerTick * _totalCount;
+  int distance = _totalCount;
+  //int distance = _degPerTick * _totalCount;
   _totalCount = 0;
   return distance;
 }
