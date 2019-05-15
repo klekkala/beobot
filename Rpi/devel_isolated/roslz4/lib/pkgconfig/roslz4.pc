@@ -1,0 +1,8 @@
+prefix=/home/pi/catkin_ws/src/devel_isolated/roslz4
+
+Name: roslz4
+Description: Description of roslz4
+Version: 1.12.14
+Cflags: -I/home/pi/catkin_ws/src/src/ros_comm/roslz4/include -I/usr/include
+Libs: -L/home/pi/catkin_ws/src/devel_isolated/roslz4/lib -lroslz4 /usr/lib/arm-linux-gnueabihf/liblz4.so
+Requires: 

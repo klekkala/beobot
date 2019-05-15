@@ -29,7 +29,9 @@ from beobot_diff.msg import Adc, Motor
 
 
 def rf_map(value, frommin, frommax, tomin, tomax):
-	if(value < frommin):
+        if(value == 0):
+            return 0
+        if(value < frommin):
 		value = frommin
 	if(value > frommax):
 		value = frommax
@@ -82,8 +84,8 @@ class TwistToMotors():
         # dx = (l + r) / 2
         # dr = (r - l) / w
            
-        self.right = 100 * self.dx + self.dr * self.w / 2 
-        self.left = 100 * self.dx - self.dr * self.w / 2
+        self.left = 100 * self.dx + self.dr * self.w / 2 
+        self.right = 100 * self.dx - self.dr * self.w / 2
 	
 	if (self.left < 0):
 		self.left = 0

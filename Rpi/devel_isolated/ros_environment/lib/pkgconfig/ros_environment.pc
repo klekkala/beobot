@@ -1,0 +1,8 @@
+prefix=/home/pi/catkin_ws/src/devel_isolated/ros_environment
+
+Name: ros_environment
+Description: Description of ros_environment
+Version: 1.0.0
+Cflags: 
+Libs: -L/home/pi/catkin_ws/src/devel_isolated/ros_environment/lib 
+Requires: 

@@ -1,0 +1,14 @@
+/opt/ros/kinetic/_setup_util.py
+/opt/ros/kinetic/env.sh
+/opt/ros/kinetic/setup.bash
+/opt/ros/kinetic/setup.sh
+/opt/ros/kinetic/setup.zsh
+/opt/ros/kinetic/.rosinstall
+/opt/ros/kinetic/lib/pkgconfig/roslib.pc
+/opt/ros/kinetic/share/roslib/cmake/roslib-extras.cmake
+/opt/ros/kinetic/share/roslib/cmake/roslibConfig.cmake
+/opt/ros/kinetic/share/roslib/cmake/roslibConfig-version.cmake
+/opt/ros/kinetic/share/roslib/package.xml
+/opt/ros/kinetic/lib/libroslib.so
+/opt/ros/kinetic/include/ros/package.h
+/opt/ros/kinetic/lib/roslib/gendeps

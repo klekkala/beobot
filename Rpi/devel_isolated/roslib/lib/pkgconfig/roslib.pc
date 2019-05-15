@@ -1,0 +1,8 @@
+prefix=/home/pi/catkin_ws/src/devel_isolated/roslib
+
+Name: roslib
+Description: Description of roslib
+Version: 1.14.4
+Cflags: -I/home/pi/catkin_ws/src/src/ros/roslib/include
+Libs: -L/home/pi/catkin_ws/src/devel_isolated/roslib/lib -lroslib
+Requires: rospack

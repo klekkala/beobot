@@ -1,0 +1,15 @@
+/opt/ros/kinetic/_setup_util.py
+/opt/ros/kinetic/env.sh
+/opt/ros/kinetic/setup.bash
+/opt/ros/kinetic/setup.sh
+/opt/ros/kinetic/setup.zsh
+/opt/ros/kinetic/.rosinstall
+/opt/ros/kinetic/lib/pkgconfig/gencpp.pc
+/opt/ros/kinetic/share/gencpp/cmake/gencpp-extras.cmake
+/opt/ros/kinetic/share/gencpp/cmake/gencppConfig.cmake
+/opt/ros/kinetic/share/gencpp/cmake/gencppConfig-version.cmake
+/opt/ros/kinetic/share/gencpp/package.xml
+/opt/ros/kinetic/etc/ros/genmsg/gencpp
+/opt/ros/kinetic/share/gencpp/msg.h.template
+/opt/ros/kinetic/share/gencpp/srv.h.template
+/opt/ros/kinetic/lib/gencpp/gen_cpp.py

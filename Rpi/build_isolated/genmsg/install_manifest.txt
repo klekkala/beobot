@@ -1,0 +1,17 @@
+/opt/ros/kinetic/_setup_util.py
+/opt/ros/kinetic/env.sh
+/opt/ros/kinetic/setup.bash
+/opt/ros/kinetic/setup.sh
+/opt/ros/kinetic/setup.zsh
+/opt/ros/kinetic/.rosinstall
+/opt/ros/kinetic/lib/pkgconfig/genmsg.pc
+/opt/ros/kinetic/share/genmsg/cmake/genmsg-extras.cmake
+/opt/ros/kinetic/share/genmsg/cmake/genmsgConfig.cmake
+/opt/ros/kinetic/share/genmsg/cmake/genmsgConfig-version.cmake
+/opt/ros/kinetic/share/genmsg/package.xml
+/opt/ros/kinetic/share/genmsg/cmake/pkg-genmsg.cmake.em
+/opt/ros/kinetic/share/genmsg/cmake/pkg-genmsg.context.in
+/opt/ros/kinetic/share/genmsg/cmake/pkg-msg-extras.cmake.in
+/opt/ros/kinetic/share/genmsg/cmake/pkg-msg-paths.cmake.develspace.in
+/opt/ros/kinetic/share/genmsg/cmake/pkg-msg-paths.cmake.installspace.in
+/opt/ros/kinetic/lib/genmsg/genmsg_check_deps.py

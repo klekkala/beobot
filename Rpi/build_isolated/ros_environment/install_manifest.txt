@@ -1,0 +1,14 @@
+/opt/ros/kinetic/_setup_util.py
+/opt/ros/kinetic/env.sh
+/opt/ros/kinetic/setup.bash
+/opt/ros/kinetic/setup.sh
+/opt/ros/kinetic/setup.zsh
+/opt/ros/kinetic/.rosinstall
+/opt/ros/kinetic/lib/pkgconfig/ros_environment.pc
+/opt/ros/kinetic/share/ros_environment/cmake/ros_environmentConfig.cmake
+/opt/ros/kinetic/share/ros_environment/cmake/ros_environmentConfig-version.cmake
+/opt/ros/kinetic/share/ros_environment/package.xml
+/opt/ros/kinetic/etc/catkin/profile.d/1.ros_distro.sh
+/opt/ros/kinetic/etc/catkin/profile.d/1.ros_etc_dir.sh
+/opt/ros/kinetic/etc/catkin/profile.d/1.ros_package_path.sh
+/opt/ros/kinetic/etc/catkin/profile.d/1.ros_version.sh

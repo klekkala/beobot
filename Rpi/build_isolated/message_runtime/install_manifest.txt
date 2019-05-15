@@ -1,0 +1,10 @@
+/opt/ros/kinetic/_setup_util.py
+/opt/ros/kinetic/env.sh
+/opt/ros/kinetic/setup.bash
+/opt/ros/kinetic/setup.sh
+/opt/ros/kinetic/setup.zsh
+/opt/ros/kinetic/.rosinstall
+/opt/ros/kinetic/lib/pkgconfig/message_runtime.pc
+/opt/ros/kinetic/share/message_runtime/cmake/message_runtimeConfig.cmake
+/opt/ros/kinetic/share/message_runtime/cmake/message_runtimeConfig-version.cmake
+/opt/ros/kinetic/share/message_runtime/package.xml

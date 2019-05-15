@@ -1,0 +1,14 @@
+/opt/ros/kinetic/_setup_util.py
+/opt/ros/kinetic/env.sh
+/opt/ros/kinetic/setup.bash
+/opt/ros/kinetic/setup.sh
+/opt/ros/kinetic/setup.zsh
+/opt/ros/kinetic/.rosinstall
+/opt/ros/kinetic/lib/pkgconfig/roscpp_serialization.pc
+/opt/ros/kinetic/share/roscpp_serialization/cmake/roscpp_serializationConfig.cmake
+/opt/ros/kinetic/share/roscpp_serialization/cmake/roscpp_serializationConfig-version.cmake
+/opt/ros/kinetic/share/roscpp_serialization/package.xml
+/opt/ros/kinetic/lib/libroscpp_serialization.so
+/opt/ros/kinetic/include/ros/serialization.h
+/opt/ros/kinetic/include/ros/serialized_message.h
+/opt/ros/kinetic/include/ros/roscpp_serialization_macros.h

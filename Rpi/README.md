@@ -1,10 +1,5 @@
-# ros_amr
-ROS AMR is a set of ROS based applications developed for an autonomous mobile robot as part of a research project developed at UVic
+# rosserial
 
-### ROS PACKAGE DEPENDENCIES:
-* Openni_camera
-* Openni_launch  
-* robot_localization  
-* cv_bridge	
-* depthimage_to_laserscan	
-* navigation_stack	
+[![Build Status](https://travis-ci.org/ros-drivers/rosserial.svg?branch=melodic-devel)](https://travis-ci.org/ros-drivers/rosserial)
+
+Please see [rosserial on the ROS wiki](http://wiki.ros.org/rosserial) to get started.

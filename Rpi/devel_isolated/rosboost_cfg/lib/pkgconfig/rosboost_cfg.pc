@@ -1,0 +1,8 @@
+prefix=/home/pi/catkin_ws/src/devel_isolated/rosboost_cfg
+
+Name: rosboost_cfg
+Description: Description of rosboost_cfg
+Version: 1.14.4
+Cflags: 
+Libs: -L/home/pi/catkin_ws/src/devel_isolated/rosboost_cfg/lib 
+Requires: 

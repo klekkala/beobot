@@ -1,0 +1,16 @@
+/opt/ros/kinetic/_setup_util.py
+/opt/ros/kinetic/env.sh
+/opt/ros/kinetic/setup.bash
+/opt/ros/kinetic/setup.sh
+/opt/ros/kinetic/setup.zsh
+/opt/ros/kinetic/.rosinstall
+/opt/ros/kinetic/lib/pkgconfig/rosunit.pc
+/opt/ros/kinetic/share/rosunit/cmake/rosunit-extras.cmake
+/opt/ros/kinetic/share/rosunit/cmake/rosunitConfig.cmake
+/opt/ros/kinetic/share/rosunit/cmake/rosunitConfig-version.cmake
+/opt/ros/kinetic/share/rosunit/package.xml
+/opt/ros/kinetic/share/rosunit/scripts/check_test_ran.py
+/opt/ros/kinetic/share/rosunit/scripts/clean_junit_xml.py
+/opt/ros/kinetic/share/rosunit/scripts/pycoverage_to_html.py
+/opt/ros/kinetic/share/rosunit/scripts/summarize_results.py
+/opt/ros/kinetic/share/rosunit/scripts/test_results_dir.py

@@ -1,0 +1,16 @@
+/opt/ros/kinetic/_setup_util.py
+/opt/ros/kinetic/env.sh
+/opt/ros/kinetic/setup.bash
+/opt/ros/kinetic/setup.sh
+/opt/ros/kinetic/setup.zsh
+/opt/ros/kinetic/.rosinstall
+/opt/ros/kinetic/lib/pkgconfig/roscpp_traits.pc
+/opt/ros/kinetic/share/roscpp_traits/cmake/roscpp_traitsConfig.cmake
+/opt/ros/kinetic/share/roscpp_traits/cmake/roscpp_traitsConfig-version.cmake
+/opt/ros/kinetic/share/roscpp_traits/package.xml
+/opt/ros/kinetic/include/ros/service_traits.h
+/opt/ros/kinetic/include/ros/message_forward.h
+/opt/ros/kinetic/include/ros/message_operations.h
+/opt/ros/kinetic/include/ros/message_event.h
+/opt/ros/kinetic/include/ros/message_traits.h
+/opt/ros/kinetic/include/ros/builtin_message_traits.h

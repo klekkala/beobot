@@ -1,0 +1,55 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/pi/catkin_ws/src/build_isolated/message_generation/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_9498b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9498b.dir/build.make CMakeFiles/cmTC_9498b.dir/build
+make[1]: Entering directory '/home/pi/catkin_ws/src/build_isolated/message_generation/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9498b.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_9498b.dir/CheckSymbolExists.c.o   -c /home/pi/catkin_ws/src/build_isolated/message_generation/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_9498b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9498b.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_9498b.dir/CheckSymbolExists.c.o  -o cmTC_9498b -rdynamic 
+CMakeFiles/cmTC_9498b.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x38): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_9498b.dir/build.make:97: recipe for target 'cmTC_9498b' failed
+make[1]: *** [cmTC_9498b] Error 1
+make[1]: Leaving directory '/home/pi/catkin_ws/src/build_isolated/message_generation/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_9498b/fast' failed
+make: *** [cmTC_9498b/fast] Error 2
+
+File /home/pi/catkin_ws/src/build_isolated/message_generation/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/pi/catkin_ws/src/build_isolated/message_generation/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_7e9cd/fast"
+/usr/bin/make -f CMakeFiles/cmTC_7e9cd.dir/build.make CMakeFiles/cmTC_7e9cd.dir/build
+make[1]: Entering directory '/home/pi/catkin_ws/src/build_isolated/message_generation/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7e9cd.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_7e9cd.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.7/Modules/CheckFunctionExists.c
+Linking C executable cmTC_7e9cd
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7e9cd.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_7e9cd.dir/CheckFunctionExists.c.o  -o cmTC_7e9cd -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_7e9cd.dir/build.make:97: recipe for target 'cmTC_7e9cd' failed
+make[1]: *** [cmTC_7e9cd] Error 1
+make[1]: Leaving directory '/home/pi/catkin_ws/src/build_isolated/message_generation/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_7e9cd/fast' failed
+make: *** [cmTC_7e9cd/fast] Error 2
+
+

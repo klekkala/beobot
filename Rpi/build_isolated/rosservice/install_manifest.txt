@@ -1,0 +1,11 @@
+/opt/ros/kinetic/_setup_util.py
+/opt/ros/kinetic/env.sh
+/opt/ros/kinetic/setup.bash
+/opt/ros/kinetic/setup.sh
+/opt/ros/kinetic/setup.zsh
+/opt/ros/kinetic/.rosinstall
+/opt/ros/kinetic/lib/pkgconfig/rosservice.pc
+/opt/ros/kinetic/share/rosservice/cmake/rosserviceConfig.cmake
+/opt/ros/kinetic/share/rosservice/cmake/rosserviceConfig-version.cmake
+/opt/ros/kinetic/share/rosservice/package.xml
+/opt/ros/kinetic/lib/rosservice/rosservice

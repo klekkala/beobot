@@ -1,0 +1,14 @@
+/opt/ros/kinetic/_setup_util.py
+/opt/ros/kinetic/env.sh
+/opt/ros/kinetic/setup.bash
+/opt/ros/kinetic/setup.sh
+/opt/ros/kinetic/setup.zsh
+/opt/ros/kinetic/.rosinstall
+/opt/ros/kinetic/lib/pkgconfig/rospy.pc
+/opt/ros/kinetic/share/rospy/cmake/rospyConfig.cmake
+/opt/ros/kinetic/share/rospy/cmake/rospyConfig-version.cmake
+/opt/ros/kinetic/share/rospy/package.xml
+/opt/ros/kinetic/share/rospy/rosbuild/rospy.cmake
+/opt/ros/kinetic/share/rospy/rosbuild/scripts/genmsg_py.py
+/opt/ros/kinetic/share/rospy/rosbuild/scripts/gensrv_py.py
+/opt/ros/kinetic/share/rospy/rosbuild/scripts/genutil.py

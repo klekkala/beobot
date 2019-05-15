@@ -1,0 +1,10 @@
+/opt/ros/kinetic/_setup_util.py
+/opt/ros/kinetic/env.sh
+/opt/ros/kinetic/setup.bash
+/opt/ros/kinetic/setup.sh
+/opt/ros/kinetic/setup.zsh
+/opt/ros/kinetic/.rosinstall
+/opt/ros/kinetic/lib/pkgconfig/message_generation.pc
+/opt/ros/kinetic/share/message_generation/cmake/message_generationConfig.cmake
+/opt/ros/kinetic/share/message_generation/cmake/message_generationConfig-version.cmake
+/opt/ros/kinetic/share/message_generation/package.xml

@@ -1,2 +1,2 @@
-uint32 a
-uint32 b
+uint8 a
+uint8 b

@@ -1,0 +1,14 @@
+/opt/ros/kinetic/_setup_util.py
+/opt/ros/kinetic/env.sh
+/opt/ros/kinetic/setup.bash
+/opt/ros/kinetic/setup.sh
+/opt/ros/kinetic/setup.zsh
+/opt/ros/kinetic/.rosinstall
+/opt/ros/kinetic/lib/pkgconfig/geneus.pc
+/opt/ros/kinetic/share/geneus/cmake/geneus-extras.cmake
+/opt/ros/kinetic/share/geneus/cmake/geneusConfig.cmake
+/opt/ros/kinetic/share/geneus/cmake/geneusConfig-version.cmake
+/opt/ros/kinetic/share/geneus/package.xml
+/opt/ros/kinetic/etc/ros/genmsg/geneus
+/opt/ros/kinetic/share/roseus/rospack_nosubdirs
+/opt/ros/kinetic/lib/geneus/gen_eus.py

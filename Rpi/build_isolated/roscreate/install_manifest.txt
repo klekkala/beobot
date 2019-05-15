@@ -1,0 +1,17 @@
+/opt/ros/kinetic/_setup_util.py
+/opt/ros/kinetic/env.sh
+/opt/ros/kinetic/setup.bash
+/opt/ros/kinetic/setup.sh
+/opt/ros/kinetic/setup.zsh
+/opt/ros/kinetic/.rosinstall
+/opt/ros/kinetic/lib/pkgconfig/roscreate.pc
+/opt/ros/kinetic/share/roscreate/cmake/roscreateConfig.cmake
+/opt/ros/kinetic/share/roscreate/cmake/roscreateConfig-version.cmake
+/opt/ros/kinetic/share/roscreate/package.xml
+/opt/ros/kinetic/share/roscreate/templates/manifest.tmpl
+/opt/ros/kinetic/share/roscreate/templates/Makefile.stack.tmpl
+/opt/ros/kinetic/share/roscreate/templates/Makefile.tmpl
+/opt/ros/kinetic/share/roscreate/templates/mainpage.tmpl
+/opt/ros/kinetic/share/roscreate/templates/CMakeLists.stack.tmpl
+/opt/ros/kinetic/share/roscreate/templates/CMakeLists.tmpl
+/opt/ros/kinetic/share/roscreate/templates/stack.tmpl

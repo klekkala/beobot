@@ -1,0 +1,8 @@
+prefix=/home/pi/catkin_ws/src/devel_isolated/rosbuild
+
+Name: rosbuild
+Description: Description of rosbuild
+Version: 1.14.4
+Cflags: 
+Libs: -L/home/pi/catkin_ws/src/devel_isolated/rosbuild/lib 
+Requires: 

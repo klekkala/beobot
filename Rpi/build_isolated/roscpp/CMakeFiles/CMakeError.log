@@ -1,0 +1,80 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/pi/catkin_ws/src/build_isolated/roscpp/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_35a07/fast"
+/usr/bin/make -f CMakeFiles/cmTC_35a07.dir/build.make CMakeFiles/cmTC_35a07.dir/build
+make[1]: Entering directory '/home/pi/catkin_ws/src/build_isolated/roscpp/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_35a07.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_35a07.dir/CheckSymbolExists.c.o   -c /home/pi/catkin_ws/src/build_isolated/roscpp/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_35a07
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_35a07.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_35a07.dir/CheckSymbolExists.c.o  -o cmTC_35a07 -rdynamic 
+CMakeFiles/cmTC_35a07.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x38): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_35a07.dir/build.make:97: recipe for target 'cmTC_35a07' failed
+make[1]: *** [cmTC_35a07] Error 1
+make[1]: Leaving directory '/home/pi/catkin_ws/src/build_isolated/roscpp/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_35a07/fast' failed
+make: *** [cmTC_35a07/fast] Error 2
+
+File /home/pi/catkin_ws/src/build_isolated/roscpp/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/pi/catkin_ws/src/build_isolated/roscpp/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_ed686/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ed686.dir/build.make CMakeFiles/cmTC_ed686.dir/build
+make[1]: Entering directory '/home/pi/catkin_ws/src/build_isolated/roscpp/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ed686.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_ed686.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.7/Modules/CheckFunctionExists.c
+Linking C executable cmTC_ed686
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ed686.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_ed686.dir/CheckFunctionExists.c.o  -o cmTC_ed686 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_ed686.dir/build.make:97: recipe for target 'cmTC_ed686' failed
+make[1]: *** [cmTC_ed686] Error 1
+make[1]: Leaving directory '/home/pi/catkin_ws/src/build_isolated/roscpp/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_ed686/fast' failed
+make: *** [cmTC_ed686/fast] Error 2
+
+
+Determining if the function trunc exists failed with the following output:
+Change Dir: /home/pi/catkin_ws/src/build_isolated/roscpp/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_f55fe/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f55fe.dir/build.make CMakeFiles/cmTC_f55fe.dir/build
+make[1]: Entering directory '/home/pi/catkin_ws/src/build_isolated/roscpp/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f55fe.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=trunc   -o CMakeFiles/cmTC_f55fe.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.7/Modules/CheckFunctionExists.c
+<command-line>:0:23: warning: conflicting types for built-in function ‘trunc’
+/usr/share/cmake-3.7/Modules/CheckFunctionExists.c:7:3: note: in expansion of macro ‘CHECK_FUNCTION_EXISTS’
+   CHECK_FUNCTION_EXISTS();
+   ^~~~~~~~~~~~~~~~~~~~~
+Linking C executable cmTC_f55fe
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f55fe.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=trunc    CMakeFiles/cmTC_f55fe.dir/CheckFunctionExists.c.o  -o cmTC_f55fe -rdynamic 
+CMakeFiles/cmTC_f55fe.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x14): undefined reference to `trunc'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_f55fe.dir/build.make:97: recipe for target 'cmTC_f55fe' failed
+make[1]: *** [cmTC_f55fe] Error 1
+make[1]: Leaving directory '/home/pi/catkin_ws/src/build_isolated/roscpp/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_f55fe/fast' failed
+make: *** [cmTC_f55fe/fast] Error 2
+
+
