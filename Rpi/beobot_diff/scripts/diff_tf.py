@@ -60,7 +60,7 @@ from geometry_msgs.msg import Quaternion
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 from tf.broadcaster import TransformBroadcaster
-from std_msgs.msg import Int16
+from std_msgs.msg import UInt8
 
 #############################################################################
 class DiffTf:
@@ -74,9 +74,9 @@ class DiffTf:
         rospy.loginfo("-I- %s started" % self.nodename)
         
         #### parameters #######
-        self.rate = rospy.get_param('~rate',10.0)  # the rate at which to publish the transform
-        self.ticks_meter = float(rospy.get_param('ticks_meter', 50))  # The number of wheel encoder ticks per meter of travel
-        self.base_width = float(rospy.get_param('~base_width', 0.245)) # The wheel base width in meters
+        self.rate = rospy.get_param('~rate',24.0)  # the rate at which to publish the transform
+        self.ticks_meter = float(rospy.get_param('ticks_meter', 90))  # The number of wheel encoder ticks per meter of travel
+        self.base_width = float(rospy.get_param('~base_width', 0.745)) # The wheel base width in meters
         
         self.base_frame_id = rospy.get_param('~base_frame_id','base_link') # the name of the base frame of the robot
         self.odom_frame_id = rospy.get_param('~odom_frame_id', 'odom') # the name of the odometry reference frame
@@ -107,7 +107,7 @@ class DiffTf:
         
         # subscriptions
         rospy.Subscriber("lenc", UInt8, self.lwheelCallback)
-        rospy.Subscriber("rwheel", UInt8, self.rwheelCallback)
+        rospy.Subscriber("renc", UInt8, self.rwheelCallback)
         self.odomPub = rospy.Publisher("odom", Odometry, queue_size=10)
         self.odomBroadcaster = TransformBroadcaster()
         
@@ -157,7 +157,6 @@ class DiffTf:
                 self.y = self.y + ( sin( self.th ) * x + cos( self.th ) * y )
             if( th != 0):
                 self.th = self.th + th
-                
             # publish the odom information
             quaternion = Quaternion()
             quaternion.x = 0.0
@@ -188,30 +187,18 @@ class DiffTf:
             
 
 
-    #############################################################################
+    #### s#########################################################################
     def lwheelCallback(self, msg):
     #############################################################################
         enc = msg.data
-        if (enc < self.encoder_low_wrap and self.prev_lencoder > self.encoder_high_wrap):
-            self.lmult = self.lmult + 1
-            
-        if (enc > self.encoder_high_wrap and self.prev_lencoder < self.encoder_low_wrap):
-            self.lmult = self.lmult - 1
-            
-        self.left = 1.0 * (enc + self.lmult * (self.encoder_max - self.encoder_min)) 
+        self.left += enc
         self.prev_lencoder = enc
         
     #############################################################################
     def rwheelCallback(self, msg):
     #############################################################################
         enc = msg.data
-        if(enc < self.encoder_low_wrap and self.prev_rencoder > self.encoder_high_wrap):
-            self.rmult = self.rmult + 1
-        
-        if(enc > self.encoder_high_wrap and self.prev_rencoder < self.encoder_low_wrap):
-            self.rmult = self.rmult - 1
-            
-        self.right = 1.0 * (enc + self.rmult * (self.encoder_max - self.encoder_min))
+        self.right += enc
         self.prev_rencoder = enc
 
 #############################################################################

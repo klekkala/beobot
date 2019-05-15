@@ -21,9 +21,19 @@
 
 import rospy
 import roslib
-from std_msgs.msg import Float32
-from geometry_msgs.msg import Twist 
+from std_msgs.msg import UInt8
+from geometry_msgs.msg import Twist
+from beobot_diff.msg import Adc, Motor
 
+
+
+
+def rf_map(value, frommin, frommax, tomin, tomax):
+	if(value < frommin):
+		value = frommin
+	if(value > frommax):
+		value = frommax
+	return (((value-frommin)*(tomax-tomin))/(frommax-frommin)) + tomin
 #############################################################
 #############################################################
 class TwistToMotors():
@@ -37,14 +47,13 @@ class TwistToMotors():
         nodename = rospy.get_name()
         rospy.loginfo("%s started" % nodename)
     
-        self.w = rospy.get_param("~base_width", 0.2)
+        self.w = rospy.get_param("~base_width", 70)
     
-        self.pub_lmotor = rospy.Publisher('lwheel_vtarget', UInt8, queue_size=10)
-        self.pub_rmotor = rospy.Publisher('rwheel_vtarget', UInt8, queue_size=10)
+        self.pub_motor = rospy.Publisher('cmd_motor', Motor, queue_size=10)
         rospy.Subscriber('rf', Adc, self.rfCallback)
     
     
-        self.rate = rospy.get_param("~rate", 50)
+        self.rate = rospy.get_param("~rate", 17)
         self.timeout_ticks = rospy.get_param("~timeout_ticks", 2)
         self.left = 0
         self.right = 0
@@ -72,25 +81,33 @@ class TwistToMotors():
     
         # dx = (l + r) / 2
         # dr = (r - l) / w
-            
-        self.right = 1.0 * self.dx + self.dr * self.w / 2 
-        self.left = 1.0 * self.dx - self.dr * self.w / 2
-        # rospy.loginfo("publishing: (%d, %d)", left, right) 
-                
-        self.pub_lmotor.publish(self.left)
-        self.pub_rmotor.publish(self.right)
-            
-        self.ticks_since_target += 1
+           
+        self.right = 100 * self.dx + self.dr * self.w / 2 
+        self.left = 100 * self.dx - self.dr * self.w / 2
+	
+	if (self.left < 0):
+		self.left = 0
+	if (self.right < 0):
+		self.right = 0        
+	# rospy.loginfo("publishing: (%d, %d)", left, right) 
+        
+	msg = Motor()
+	msg.a = self.left
+	msg.b = self.right       
+        self.pub_motor.publish(msg)
+        self.ticks_since_target += 1 
 
     #############################################################
-    def twistCallback(self,msg):
+    def rfCallback(self,msg):
     #############################################################
         # rospy.loginfo("-D- twistCallback: %s" % str(msg))
         self.ticks_since_target = 0
-        self.dx = msg.linear.x
-        self.dr = msg.angular.z
-        self.dy = msg.linear.y
-    
+        #self.dx = msg.linear.x
+        #self.dr = msg.angular.z
+        #self.dy = msg.linear.y
+        self.dx = rf_map(msg.adc0, 1000.0, 2000.0, 0.0, 1.0)
+        self.dr = rf_map(msg.adc1, 1000.0, 2000.0, -1.0, 1.0)
+        self.dy = 0    
 #############################################################
 #############################################################
 if __name__ == '__main__':

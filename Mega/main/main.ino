@@ -59,6 +59,7 @@ void loop() {
   lencoder.publish(&lticks_m);
   rencoder.publish(&rticks_m);
   nh.spinOnce();
+  delay(40);
 }
 
 void LeftupdateCountA(){
