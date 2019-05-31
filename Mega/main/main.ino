@@ -56,10 +56,11 @@ void loop() {
   RightEncoder.getSpeed(forward);
   lticks_m.data = LeftEncoder.getDistance();
   rticks_m.data = RightEncoder.getDistance();
+  Serial.println(rticks_m.data);
   lencoder.publish(&lticks_m);
   rencoder.publish(&rticks_m);
   nh.spinOnce();
-  delay(40);
+  delay(70);
 }
 
 void LeftupdateCountA(){
