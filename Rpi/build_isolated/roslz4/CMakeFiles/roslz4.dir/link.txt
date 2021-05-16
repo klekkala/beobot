@@ -1,1 +1,0 @@
-/usr/bin/cc  -fPIC -O3 -DNDEBUG  -shared -Wl,-soname,libroslz4.so -o /home/pi/catkin_ws/src/devel_isolated/roslz4/lib/libroslz4.so CMakeFiles/roslz4.dir/src/lz4s.c.o CMakeFiles/roslz4.dir/src/xxhash.c.o -llz4 

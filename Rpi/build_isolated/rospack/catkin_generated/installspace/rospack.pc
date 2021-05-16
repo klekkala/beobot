@@ -1,8 +1,0 @@
-prefix=/opt/ros/kinetic
-
-Name: rospack
-Description: Description of rospack
-Version: 2.4.4
-Cflags: -I/opt/ros/kinetic/include -I/usr/include
-Libs: -L/opt/ros/kinetic/lib -lrospack /usr/lib/arm-linux-gnueabihf/libpython2.7.so /usr/lib/arm-linux-gnueabihf/libboost_filesystem.so /usr/lib/arm-linux-gnueabihf/libboost_program_options.so /usr/lib/arm-linux-gnueabihf/libboost_system.so /usr/lib/arm-linux-gnueabihf/libtinyxml.so
-Requires: 

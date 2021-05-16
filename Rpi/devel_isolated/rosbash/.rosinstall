@@ -1,2 +1,0 @@
-- setup-file:
-    local-name: /home/pi/catkin_ws/src/devel_isolated/rosbash/setup.sh

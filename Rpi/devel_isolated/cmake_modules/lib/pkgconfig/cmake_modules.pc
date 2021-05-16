@@ -1,8 +1,0 @@
-prefix=/home/pi/catkin_ws/src/devel_isolated/cmake_modules
-
-Name: cmake_modules
-Description: Description of cmake_modules
-Version: 0.4.2
-Cflags: 
-Libs: -L/home/pi/catkin_ws/src/devel_isolated/cmake_modules/lib 
-Requires: 

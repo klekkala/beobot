@@ -1,1 +1,0 @@
-/usr/bin/cc  -fPIC -O3 -DNDEBUG  -shared -Wl,-soname,_roslz4.so -o /home/pi/catkin_ws/src/devel_isolated/roslz4/lib/python2.7/dist-packages/roslz4/_roslz4.so CMakeFiles/roslz4_py.dir/src/_roslz4module.c.o -Wl,-rpath,/home/pi/catkin_ws/src/devel_isolated/roslz4/lib: /home/pi/catkin_ws/src/devel_isolated/roslz4/lib/libroslz4.so -lpython2.7 -llz4 

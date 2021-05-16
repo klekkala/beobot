@@ -1,8 +1,0 @@
-prefix=/home/pi/catkin_ws/src/devel_isolated/topic_tools
-
-Name: topic_tools
-Description: Description of topic_tools
-Version: 1.12.14
-Cflags: -I/home/pi/catkin_ws/src/devel_isolated/topic_tools/include -I/home/pi/catkin_ws/src/src/ros_comm/topic_tools/include
-Libs: -L/home/pi/catkin_ws/src/devel_isolated/topic_tools/lib -ltopic_tools
-Requires: message_runtime rosconsole roscpp std_msgs xmlrpcpp

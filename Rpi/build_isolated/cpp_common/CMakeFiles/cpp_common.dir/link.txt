@@ -1,1 +1,0 @@
-/usr/bin/c++  -fPIC -O3 -DNDEBUG  -shared -Wl,-soname,libcpp_common.so -o /home/pi/catkin_ws/src/devel_isolated/cpp_common/lib/libcpp_common.so CMakeFiles/cpp_common.dir/src/debug.cpp.o CMakeFiles/cpp_common.dir/src/header.cpp.o -lboost_system -lboost_thread -lboost_chrono -lboost_date_time -lboost_atomic -lpthread -lconsole_bridge 

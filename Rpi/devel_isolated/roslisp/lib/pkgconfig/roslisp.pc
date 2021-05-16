@@ -1,8 +1,0 @@
-prefix=/home/pi/catkin_ws/src/devel_isolated/roslisp
-
-Name: roslisp
-Description: Description of roslisp
-Version: 1.9.21
-Cflags: 
-Libs: -L/home/pi/catkin_ws/src/devel_isolated/roslisp/lib 
-Requires: 

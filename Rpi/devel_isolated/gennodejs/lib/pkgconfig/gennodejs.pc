@@ -1,8 +1,0 @@
-prefix=/home/pi/catkin_ws/src/devel_isolated/gennodejs
-
-Name: gennodejs
-Description: Description of gennodejs
-Version: 2.0.1
-Cflags: 
-Libs: -L/home/pi/catkin_ws/src/devel_isolated/gennodejs/lib 
-Requires: genmsg

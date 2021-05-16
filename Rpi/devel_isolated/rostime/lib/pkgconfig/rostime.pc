@@ -1,8 +1,0 @@
-prefix=/home/pi/catkin_ws/src/devel_isolated/rostime
-
-Name: rostime
-Description: Description of rostime
-Version: 0.6.11
-Cflags: -I/home/pi/catkin_ws/src/src/roscpp_core/rostime/include -I/usr/include
-Libs: -L/home/pi/catkin_ws/src/devel_isolated/rostime/lib -lrostime /usr/lib/arm-linux-gnueabihf/libboost_date_time.so /usr/lib/arm-linux-gnueabihf/libboost_system.so /usr/lib/arm-linux-gnueabihf/libboost_thread.so /usr/lib/arm-linux-gnueabihf/libboost_chrono.so /usr/lib/arm-linux-gnueabihf/libboost_atomic.so /usr/lib/arm-linux-gnueabihf/libpthread.so
-Requires: cpp_common

@@ -1,8 +1,0 @@
-prefix=/home/pi/catkin_ws/src/devel_isolated/roscpp_traits
-
-Name: roscpp_traits
-Description: Description of roscpp_traits
-Version: 0.6.11
-Cflags: -I/home/pi/catkin_ws/src/src/roscpp_core/roscpp_traits/include
-Libs: -L/home/pi/catkin_ws/src/devel_isolated/roscpp_traits/lib 
-Requires: cpp_common rostime

@@ -1,8 +1,0 @@
-prefix=/home/pi/catkin_ws/src/devel_isolated/genlisp
-
-Name: genlisp
-Description: Description of genlisp
-Version: 0.4.16
-Cflags: 
-Libs: -L/home/pi/catkin_ws/src/devel_isolated/genlisp/lib 
-Requires: genmsg
