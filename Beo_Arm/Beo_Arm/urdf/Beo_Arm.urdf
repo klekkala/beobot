@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="Beo_Arm">
+  <link
+    name="link_1">
+    <inertial>
+      <origin
+        xyz="0.0385731163984194 6.17303749939274E-18 0.0290614049862596"
+        rpy="0 0 0" />
+      <mass
+        value="0.323605809581169" />
+      <inertia
+        ixx="0.000161147613159255"
+        ixy="8.01544492901064E-22"
+        ixz="8.44321479741365E-06"
+        iyy="0.000450631135476571"
+        iyz="7.13421240655373E-21"
+        izz="0.000418295360654488" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beo_Arm/meshes/link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beo_Arm/meshes/link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="link_2">
+    <inertial>
+      <origin
+        xyz="0.0227815027756188 -1.98408997564847E-17 0.019"
+        rpy="0 0 0" />
+      <mass
+        value="0.0178646986447077" />
+      <inertia
+        ixx="5.52910048182247E-06"
+        ixy="7.27918939046664E-21"
+        ixz="-4.26995705611919E-21"
+        iyy="3.44196286692544E-05"
+        iyz="1.00447299859515E-21"
+        izz="3.24160176753154E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beo_Arm/meshes/link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beo_Arm/meshes/link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_1"
+    type="continuous">
+    <origin
+      xyz="0 0 0.08431"
+      rpy="0 0 -0.0180602773891119" />
+    <parent
+      link="link_1" />
+    <child
+      link="link_2" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="link_3">
+    <inertial>
+      <origin
+        xyz="8.32667268468867E-17 0.0315164899121853 0.121"
+        rpy="0 0 0" />
+      <mass
+        value="0.0649301185542533" />
+      <inertia
+        ixx="0.000507342791034516"
+        ixy="-8.470329472543E-22"
+        ixz="5.88334795617755E-21"
+        iyy="0.000476962065829218"
+        iyz="1.23775998139985E-19"
+        izz="3.22586635547296E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beo_Arm/meshes/link_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beo_Arm/meshes/link_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_2"
+    type="continuous">
+    <origin
+      xyz="0 0 0.019"
+      rpy="0 -0.0391354579270017 0" />
+    <parent
+      link="link_2" />
+    <child
+      link="link_3" />
+    <axis
+      xyz="-0.134117389318996 0.990951536857201 0.00525142672125888" />
+  </joint>
+  <link
+    name="link_4">
+    <inertial>
+      <origin
+        xyz="0.000802784843333005 0.00224348866671527 0.101288784293066"
+        rpy="0 0 0" />
+      <mass
+        value="0.0444466554551977" />
+      <inertia
+        ixx="6.90359436621288E-05"
+        ixy="2.69280725123079E-07"
+        ixz="-1.64388414376807E-06"
+        iyy="7.11174844416945E-05"
+        iyz="-4.55505444025833E-07"
+        izz="6.99283315207976E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beo_Arm/meshes/link_4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beo_Arm/meshes/link_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_3"
+    type="continuous">
+    <origin
+      xyz="8.56085375371338E-05 -0.00127084526654451 0.241996647959196"
+      rpy="0.00525549848908786 -0.0392495208614394 0.134318392766936" />
+    <parent
+      link="link_3" />
+    <child
+      link="link_4" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="hand">
+    <inertial>
+      <origin
+        xyz="0.00360655675294224 0.00165305352719414 0.0886336164731698"
+        rpy="0 0 0" />
+      <mass
+        value="0.0570006651942083" />
+      <inertia
+        ixx="0.000227773695653776"
+        ixy="3.81164826264435E-21"
+        ixz="-6.85870049069053E-05"
+        iyy="0.000244454826346668"
+        iyz="-3.1790205301638E-20"
+        izz="5.61269459945458E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beo_Arm/meshes/hand.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beo_Arm/meshes/hand.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_4"
+    type="fixed">
+    <origin
+      xyz="0.0140000000000043 0 0.21558"
+      rpy="-0.0104630114004552 -0.00141275247014232 -0.134206928841141" />
+    <parent
+      link="link_4" />
+    <child
+      link="hand" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>
