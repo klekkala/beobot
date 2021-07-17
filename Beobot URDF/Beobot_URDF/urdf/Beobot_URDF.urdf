@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="Beobot_URDF">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-2.74867128376264E-18 -0.11195728218561 -0.0348475770486717"
+        rpy="0 0 0" />
+      <mass
+        value="12.6734803957436" />
+      <inertia
+        ixx="0.0962399295509494"
+        ixy="4.46153776012135E-18"
+        ixz="3.96730545165019E-19"
+        iyy="0.279749651250404"
+        iyz="-3.56567450144222E-06"
+        izz="0.190640162086902" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="left_wheel">
+    <inertial>
+      <origin
+        xyz="0 0 0.025"
+        rpy="0 0 0" />
+      <mass
+        value="0.963877503284561" />
+      <inertia
+        ixx="0.00173116001505925"
+        ixy="9.09442722940398E-37"
+        ixz="7.05860789378559E-22"
+        iyy="0.00173116001505925"
+        iyz="7.62310521474892E-37"
+        izz="0.00310961165234764" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/left_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/left_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="0 0.23535 0"
+      rpy="1.5708 0 3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_wheel" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="right_wheel">
+    <inertial>
+      <origin
+        xyz="0 2.08166817117217E-17 -0.0250000000000001"
+        rpy="0 0 0" />
+      <mass
+        value="0.963877503284561" />
+      <inertia
+        ixx="0.00173116001505925"
+        ixy="-5.14894137640762E-36"
+        ixz="-1.30593527677662E-21"
+        iyy="0.00173116001505925"
+        iyz="5.86567729539708E-36"
+        izz="0.00310961165234764" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/right_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/right_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="0 -0.23535 0"
+      rpy="1.5708 0 3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_wheel" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="Velodine">
+    <inertial>
+      <origin
+        xyz="-0.0462541473474608 0.401957002144411 -3.03270030964584E-14"
+        rpy="0 0 0" />
+      <mass
+        value="15.4073799305962" />
+      <inertia
+        ixx="0.831266480060712"
+        ixy="0.0846918992847239"
+        ixz="-7.42541310493356E-14"
+        iyy="0.482078145790792"
+        iyz="1.90322045506833E-14"
+        izz="0.67052569422287" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/Velodine.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/Velodine.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Velodine_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0889 0 0.54034"
+      rpy="-1.5708 0 3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="Velodine" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Hokuyo">
+    <inertial>
+      <origin
+        xyz="9.62077521419697E-13 -0.0104575797147916 1.47756675626387E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.485765672289228" />
+      <inertia
+        ixx="0.000181662528040023"
+        ixy="-9.18790782713934E-15"
+        ixz="-3.66479958406851E-18"
+        iyy="0.000256014886917181"
+        iyz="3.34955142680391E-07"
+        izz="0.000181671483298989" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/Hokuyo.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.109803921568627 0.109803921568627 0.109803921568627 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/Hokuyo.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Hokuyo_joint"
+    type="fixed">
+    <origin
+      xyz="0.1162 0 0.099388"
+      rpy="1.5708 0 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="Hokuyo" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="realsense_1">
+    <inertial>
+      <origin
+        xyz="-0.000390708981744118 6.0213850732127E-05 -0.00789836120752992"
+        rpy="0 0 0" />
+      <mass
+        value="0.0640757402115452" />
+      <inertia
+        ixx="4.56933950983258E-06"
+        ixy="1.9637026905188E-08"
+        ixz="-1.9640169295051E-08"
+        iyy="5.78325356119456E-05"
+        iyz="-2.70197587000316E-08"
+        izz="6.11005211759777E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/realsense_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/realsense_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="realsense_1_joint"
+    type="fixed">
+    <origin
+      xyz="0.04226 -0.01 0.52134"
+      rpy="1.5708 0 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="realsense_1" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="realsense_2">
+    <inertial>
+      <origin
+        xyz="-0.000390727714836211 6.02198851966107E-05 -0.00789831950081422"
+        rpy="0 0 0" />
+      <mass
+        value="0.0640758131335188" />
+      <inertia
+        ixx="4.56932762206531E-06"
+        ixy="1.96279388911153E-08"
+        ixz="-1.96296361397574E-08"
+        iyy="5.78324921080404E-05"
+        iyz="-2.70182564959582E-08"
+        izz="6.11004660078237E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/realsense_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/realsense_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="realsense_2_joint"
+    type="fixed">
+    <origin
+      xyz="-0.038859 0.12165 0.52134"
+      rpy="1.5708 0 2.8274" />
+    <parent
+      link="base_link" />
+    <child
+      link="realsense_2" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="realsense-3">
+    <inertial>
+      <origin
+        xyz="-0.000390711125077596 6.02140272299434E-05 -0.00789829963711089"
+        rpy="0 0 0" />
+      <mass
+        value="0.0640759764530585" />
+      <inertia
+        ixx="4.56931678268256E-06"
+        ixy="1.96354145230679E-08"
+        ixz="-1.96294330086947E-08"
+        iyy="5.78325523336582E-05"
+        iyz="-2.70157100147938E-08"
+        izz="6.11005273610629E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/realsense-3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/realsense-3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="realsense_3_joint"
+    type="fixed">
+    <origin
+      xyz="-0.18913 0.085184 0.52134"
+      rpy="1.5708 0 -2.1991" />
+    <parent
+      link="base_link" />
+    <child
+      link="realsense-3" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="realsense-4">
+    <inertial>
+      <origin
+        xyz="-0.000390713924562636 6.02136938450126E-05 -0.00789830922872015"
+        rpy="0 0 0" />
+      <mass
+        value="0.0640759564192247" />
+      <inertia
+        ixx="4.56931439710641E-06"
+        ixy="1.96328703835944E-08"
+        ixz="-1.96361731808958E-08"
+        iyy="5.78325491710456E-05"
+        iyz="-2.70155909066205E-08"
+        izz="6.11005263902705E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/realsense-4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/realsense-4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="realsense_4_joint"
+    type="fixed">
+    <origin
+      xyz="-0.20089 -0.069004 0.52134"
+      rpy="1.5708 0 -0.94248" />
+    <parent
+      link="base_link" />
+    <child
+      link="realsense-4" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="realsense-5">
+    <inertial>
+      <origin
+        xyz="-0.000390716753084681 6.02205588272064E-05 -0.00789835961425352"
+        rpy="0 0 0" />
+      <mass
+        value="0.0640758063284641" />
+      <inertia
+        ixx="4.56932587065373E-06"
+        ixy="1.96259913581191E-08"
+        ixz="-1.96365139618689E-08"
+        iyy="5.78325456694762E-05"
+        iyz="-2.70157327693282E-08"
+        izz="6.11005215937732E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/realsense-5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Beobot_URDF/meshes/realsense-5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="realsense_5_joint"
+    type="fixed">
+    <origin
+      xyz="-0.05788 -0.12783 0.52134"
+      rpy="1.5708 0 0.31416" />
+    <parent
+      link="base_link" />
+    <child
+      link="realsense-5" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>
