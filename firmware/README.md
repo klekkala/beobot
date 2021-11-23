@@ -1,1 +1,0 @@
-# beobot_firmware
