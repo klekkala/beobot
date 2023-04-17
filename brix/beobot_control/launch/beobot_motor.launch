@@ -1,3 +1,0 @@
-<launch>
-  <node name="beobot_motor" pkg="beobot_motor" type="beobot_motor.py" output="screen"/>
-</launch>

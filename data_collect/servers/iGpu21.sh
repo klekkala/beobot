@@ -1,0 +1,11 @@
+tmux new-session -d docker run --rm --name=2171 -p 2171-2173:2171-2173 --gpus "device=1" $(grep "2171" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2177 -p 2177-2179:2177-2179 --gpus "device=1" $(grep "2177" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2183 -p 2183-2185:2183-2185 --gpus "device=1" $(grep "2183" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2186 -p 2186-2188:2186-2188 --gpus "device=1" $(grep "2186" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2189 -p 2189-2191:2189-2191 --gpus "device=1" $(grep "2189" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2192 -p 2192-2194:2192-2194 --gpus "device=1" $(grep "2192" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2195 -p 2195-2197:2195-2197 --gpus "device=1" $(grep "2195" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2198 -p 2198-2200:2198-2200 --gpus "device=1" $(grep "2198" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2201 -p 2201-2203:2201-2203 --gpus "device=1" $(grep "2201" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2204 -p 2204-2206:2204-2206 --gpus "device=1" $(grep "2204" distribute/sim.txt)
+

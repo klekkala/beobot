@@ -1,0 +1,9 @@
+rosbag record -o /media/ssd/test.bag /cam_1/color/image_raw /cam_1/color/metadata /cam_1/depth/image_rect_raw /cam_1/depth/metadata /cam_1/infra2/image_rect_raw /cam_1/infra2/metadata /velodyne_points
+
+rosbag record -o /media/nvme/test.bag /cam_2/color/image_raw /cam_2/color/metadata /cam_2/depth/image_rect_raw /cam_2/depth/metadata /cam_2/infra2/image_rect_raw /cam_2/infra2/metadata
+
+rosbag record -o /media/nvme/test.bag /cam_3/color/image_raw /cam_3/color/metadata /cam_3/depth/image_rect_raw /cam_3/depth/metadata /cam_3/infra2/image_rect_raw /cam_3/infra2/metadata
+
+rosbag record -o /media/nvme/test.bag /cam_4/color/image_raw /cam_4/color/metadata /cam_4/depth/image_rect_raw /cam_4/depth/metadata /cam_4/infra2/image_rect_raw /cam_4/infra2/metadata
+
+rosbag record -o /media/nvme/test.bag /cam_5/color/image_raw /cam_5/color/metadata /cam_5/depth/image_rect_raw /cam_5/depth/metadata /cam_5/infra2/image_rect_raw /cam_5/infra2/metadata

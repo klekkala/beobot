@@ -1,0 +1,18 @@
+tmux new-session -d docker run --rm --name=2000 -p 2000-2002:2000-2002 --gpus "device=0" $(grep "2000" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2003 -p 2003-2005:2003-2005 --gpus "device=0" $(grep "2003" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2006 -p 2006-2008:2006-2008 --gpus "device=0" $(grep "2006" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2009 -p 2009-2011:2009-2011 --gpus "device=0" $(grep "2009" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2018 -p 2018-2020:2018-2020 --gpus "device=0" $(grep "2018" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2027 -p 2027-2029:2027-2029 --gpus "device=0" $(grep "2027" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2033 -p 2033-2035:2033-2035 --gpus "device=0" $(grep "2033" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2036 -p 2036-2038:2036-2038 --gpus "device=0" $(grep "2036" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2042 -p 2042-2044:2042-2044 --gpus "device=1" $(grep "2042" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2045 -p 2045-2047:2045-2047 --gpus "device=1" $(grep "2045" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2051 -p 2051-2053:2051-2053 --gpus "device=1" $(grep "2051" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2066 -p 2066-2068:2066-2068 --gpus "device=1" $(grep "2066" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2069 -p 2069-2071:2069-2071 --gpus "device=1" $(grep "2069" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2078 -p 2078-2080:2078-2080 --gpus "device=1" $(grep "2078" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2081 -p 2081-2083:2081-2083 --gpus "device=1" $(grep "2081" distribute/sim.txt)
+tmux new-session -d docker run --rm --name=2093 -p 2093-2095:2093-2095 --gpus "device=1" $(grep "2093" distribute/sim.txt)
+
+
